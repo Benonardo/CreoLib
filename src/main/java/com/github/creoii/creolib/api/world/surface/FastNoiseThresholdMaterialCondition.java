@@ -39,7 +39,7 @@ public class FastNoiseThresholdMaterialCondition implements MaterialRules.Materi
     @Override
     public MaterialRules.BooleanSupplier apply(final MaterialRules.MaterialRuleContext materialRuleContext) {
         return () -> {
-            double noiseValue = threeDimensional ? noise.value().GetNoise(materialRuleContext.blockX, materialRuleContext.blockY, materialRuleContext.blockX) : noise.value().GetNoise(materialRuleContext.blockX, 0, materialRuleContext.blockX);
+            double noiseValue = threeDimensional ? noise.value().getNoise(materialRuleContext.blockX, materialRuleContext.blockY, materialRuleContext.blockX) : noise.value().getNoise(materialRuleContext.blockX, 0, materialRuleContext.blockX);
             for (MathUtil.Range range : ranges) {
                 if (noiseValue >= range.min() && noiseValue < range.max()) {
                     return true;

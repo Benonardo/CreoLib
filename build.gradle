@@ -4,7 +4,12 @@ plugins {
 }
 
 repositories {
-    mavenCentral()
+    maven {
+        url "https://cursemaven.com"
+        content {
+            includeGroup "curse.maven"
+        }
+    }
 }
 
 apply plugin: 'java'
@@ -55,29 +60,12 @@ java {
 
 publishing {
     publications {
-        creolib(MavenPublication) {
-            groupId = "com.github.creoii"
-            artifactId = "creolib"
-            version = "0.0.1-alpha.4"
-            from components.java
-            pom {
-                licenses {
-                    license {
-                        name = 'GNU Lesser General Public License v3.0'
-                        url = 'https://www.gnu.org/licenses/lgpl-3.0.txt'
-                    }
-                }
+        mavenJava(MavenPublication) {
+            artifact(remapJar) {
+                builtBy remapJar
             }
-        }
-    }
-
-    repositories {
-        maven {
-            name = "GitHubPackages"
-            url = "https://maven.pkg.github.com/jack-zisa/CreoLib"
-            credentials(PasswordCredentials) {
-                username System.getenv("GITHUB_USERNAME")
-                password System.getenv("GITHUB_TOKEN")
+            artifact(sourcesJar) {
+                builtBy remapSourcesJar
             }
         }
     }

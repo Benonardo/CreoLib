@@ -19,7 +19,7 @@ import java.util.Map;
 import java.util.function.Function;
 
 public final class BlockUtil {
-    public final static Map<Block, CBlockSettings> BLOCK_SETTINGS_REPLACED = new HashMap<>();
+    public static final Map<Block, CBlockSettings> BLOCK_SETTINGS_REPLACED = new HashMap<>();
 
     public static CBlockSettings getOrCreateSettings(Block block) {
         if (BLOCK_SETTINGS_REPLACED.containsKey(block)) return BLOCK_SETTINGS_REPLACED.get(block);

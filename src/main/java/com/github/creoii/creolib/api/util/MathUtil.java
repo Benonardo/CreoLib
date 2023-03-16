@@ -11,7 +11,7 @@ public final class MathUtil {
      * Repeatedly calling this method on a value will randomly linearly interpolate it
      * between the min and max range
      *
-     * @param bounds The min & max value to stay between
+     * @param bounds The min and max value to stay between
      * @param n The return value
      * @param r The lerp value
      * @return Randomly lerped value of n

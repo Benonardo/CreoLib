@@ -39,7 +39,7 @@ public class FastNoiseDensityFunction implements DensityFunction {
 
     @Override
     public double sample(DensityFunction.NoisePos pos) {
-        return noise.value().GetNoise((float) (pos.blockX() * xScale), (float) (pos.blockY() * yScale), (float) (pos.blockZ() * zScale));
+        return noise.value().getNoise((float) (pos.blockX() * xScale), (float) (pos.blockY() * yScale), (float) (pos.blockZ() * zScale));
     }
 
     @Override

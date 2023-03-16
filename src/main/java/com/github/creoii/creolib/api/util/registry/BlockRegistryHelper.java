@@ -3,7 +3,7 @@ package com.github.creoii.creolib.api.util.registry;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.registry.*;
 import net.fabricmc.fabric.mixin.object.builder.AbstractBlockAccessor;
-import net.minecraft.block.Block;
+import net.minecraft.block.*;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemGroup;
@@ -11,6 +11,8 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
+
+import java.lang.reflect.Field;
 
 public final class BlockRegistryHelper {
     public static void registerBlock(Identifier id, Block block) {
@@ -48,6 +50,19 @@ public final class BlockRegistryHelper {
         registerBlock(id, block);
         if (groups != null) {
             ItemRegistryHelper.registerItem(id, new BlockItem(block, new FabricItemSettings()), groups);
+        }
+    }
+
+    public static void registerBlocks(Class<?> clazz, String namespace) {
+        for (Field field : clazz.getDeclaredFields()) {
+            try {
+                Object fieldObj = field.get(null);
+                if (fieldObj instanceof Block block) {
+                    BlockRegistryHelper.registerBlock(new Identifier(namespace, field.getName().toLowerCase()), block);
+                }
+            } catch (IllegalAccessException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 }

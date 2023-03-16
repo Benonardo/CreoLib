@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Allows any implementing object to tick both client & server side
+ * Allows any implementing object to tick both client and server side
  */
 @FunctionalInterface
 public interface Tickable {

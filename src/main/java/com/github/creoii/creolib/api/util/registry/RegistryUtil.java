@@ -5,6 +5,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.entry.RegistryEntry;
+import org.apache.commons.compress.utils.Lists;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +29,7 @@ public final class RegistryUtil {
      * unless they are loaded with an {@link net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider}
      */
     public static <T> List<RegistryEntry<T>> getEntries(RegistryKey<? extends Registry<? extends T>> registryKey) {
-        List<RegistryEntry<T>> entries = new ArrayList<>();
+        List<RegistryEntry<T>> entries = Lists.newArrayList();
         Optional<Registry<T>> registry = getRegistryFromKey(registryKey);
         registry.ifPresent(ts -> ts.forEach(obj -> {
             entries.add(ts.getEntry(obj));

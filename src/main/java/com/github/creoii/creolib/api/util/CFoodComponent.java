@@ -9,18 +9,17 @@ import java.util.List;
 
 /**
  * Extension of {@link FoodComponent} allowing custom eating speeds
- * Any use of this class won't be considered a snack
  */
 public class CFoodComponent extends FoodComponent {
     private final int eatTime;
 
-    public CFoodComponent(int hunger, float saturationModifier, boolean meat, boolean alwaysEdible, int eatTime, List<Pair<StatusEffectInstance, Float>> statusEffects) {
-        super(hunger, saturationModifier, meat, alwaysEdible, false, statusEffects);
+    public CFoodComponent(int hunger, float saturationModifier, boolean meat, boolean alwaysEdible, boolean snack, int eatTime, List<Pair<StatusEffectInstance, Float>> statusEffects) {
+        super(hunger, saturationModifier, meat, alwaysEdible, snack, statusEffects);
         this.eatTime = eatTime;
     }
 
-    public CFoodComponent(int hunger, float saturationModifier, boolean meat, boolean alwaysEdible, int eatTime) {
-        this(hunger, saturationModifier, meat, alwaysEdible, eatTime, List.of());
+    public CFoodComponent(int hunger, float saturationModifier, boolean meat, boolean alwaysEdible, boolean snack, int eatTime) {
+        this(hunger, saturationModifier, meat, alwaysEdible, snack, eatTime, List.of());
     }
 
     public int getEatTime() {
@@ -32,6 +31,7 @@ public class CFoodComponent extends FoodComponent {
         private float saturationModifier;
         private boolean meat;
         private boolean alwaysEdible;
+        private boolean snack;
         private int eatTime;
         private final List<Pair<StatusEffectInstance, Float>> statusEffects = Lists.newArrayList();
 
@@ -55,13 +55,18 @@ public class CFoodComponent extends FoodComponent {
             return this;
         }
 
+        public CFoodComponent.Builder snack() {
+            snack = true;
+            return this;
+        }
+
         public CFoodComponent.Builder eatTime(int eatTime) {
             this.eatTime = eatTime;
             return this;
         }
 
         public CFoodComponent build() {
-            return new CFoodComponent(hunger, saturationModifier, meat, alwaysEdible, eatTime, statusEffects);
+            return new CFoodComponent(hunger, saturationModifier, meat, alwaysEdible, snack, eatTime, statusEffects);
         }
     }
 }

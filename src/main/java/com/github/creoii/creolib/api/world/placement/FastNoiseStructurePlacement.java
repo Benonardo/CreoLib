@@ -43,7 +43,7 @@ public class FastNoiseStructurePlacement extends StructurePlacement {
     protected boolean isStartChunk(StructurePlacementCalculator calculator, int chunkX, int chunkZ) {
         if (RANDOM.nextFloat() > chance) return false;
         BlockPos pos = getLocatePos(new ChunkPos(chunkX, chunkZ));
-        double noiseValue = noise.value().GetNoise(pos.getX(), 0f, pos.getZ());
+        double noiseValue = noise.value().getNoise(pos.getX(), 0f, pos.getZ());
         for (MathUtil.Range range : ranges) {
             if (noiseValue >= range.min() && noiseValue < range.max()) {
                 return true;
