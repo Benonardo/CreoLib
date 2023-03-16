@@ -3,8 +3,7 @@
 ```
 repositories {
     maven {
-        name = "Modrinth"
-        url = uri("https://api.modrinth.com/maven")
+        url = url "https://api.modrinth.com/maven"
         content {
             includeGroup("maven.modrinth")
         }
