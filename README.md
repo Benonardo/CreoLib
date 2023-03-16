@@ -9,6 +9,7 @@ repositories {
         }
     }
 }
+
 dependencies {
     modImplementation "maven.modrinth:creo-lib:VERSION"
 }
