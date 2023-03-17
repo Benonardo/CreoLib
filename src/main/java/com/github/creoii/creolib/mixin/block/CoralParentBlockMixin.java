@@ -17,7 +17,6 @@ public class CoralParentBlockMixin {
     private static void creo_lib_keepCoralAlive(BlockState state, BlockView world, BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
         for (Direction direction : Direction.values()) {
             if (world.getBlockState(pos.offset(direction)).isIn(CBlockTags.KEEPS_CORAL_ALIVE)) {
-                System.out.println("stayin' alive");
                 cir.setReturnValue(true);
             }
         }
