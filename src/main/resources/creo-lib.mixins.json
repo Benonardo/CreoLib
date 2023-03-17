@@ -42,6 +42,7 @@
     "item.ItemMixin",
     "item.ItemSettingsAccessor",
     "item.ShearsItemMixin",
+    "item.SwordItemMixin",
     "registry.RegistryLoaderMixin",
     "screen.ForgingScreenHandlerMixin",
     "screen.ScreenHandlerMixin",

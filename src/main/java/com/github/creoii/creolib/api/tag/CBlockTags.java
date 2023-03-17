@@ -30,6 +30,7 @@ public final class CBlockTags {
     public static final TagKey<Block> INVALID_FOR_SHULKER_TELEPORT = TagKey.of(RegistryKeys.BLOCK, new Identifier(CreoLib.COMMON, "invalid_for_shulker_teleport"));
     public static final TagKey<Block> SHEARS_QUICK_MINEABLE = TagKey.of(RegistryKeys.BLOCK, new Identifier(CreoLib.COMMON, "mineable/shears_quick"));
     public static final TagKey<Block> SHEARS_SLOW_MINEABLE = TagKey.of(RegistryKeys.BLOCK, new Identifier(CreoLib.COMMON, "mineable/shears_slow"));
+    public static final TagKey<Block> SWORD_MINEABLE = TagKey.of(RegistryKeys.BLOCK, new Identifier(CreoLib.COMMON, "mineable/sword"));
     // endregion
 
     // region Non-Functional Tags

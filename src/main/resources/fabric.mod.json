@@ -9,7 +9,7 @@
   ],
   "contact": {},
   "license": "MIT",
-  "icon": "assets/creo_lib/icon.png",
+  "icon": "assets/creo/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
