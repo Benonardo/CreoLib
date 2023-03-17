@@ -4,7 +4,7 @@ import com.github.creoii.creolib.api.util.CFoodComponent;
 import com.github.creoii.creolib.api.util.registry.CItemSettings;
 import com.github.creoii.creolib.api.util.registry.ItemRegistryHelper;
 import com.github.creoii.creolib.core.duck.ItemSettingsDuck;
-import com.github.creoii.creolib.core.registry.AttributeRegistry;
+import com.github.creoii.creolib.api.registry.AttributeRegistry;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistry;

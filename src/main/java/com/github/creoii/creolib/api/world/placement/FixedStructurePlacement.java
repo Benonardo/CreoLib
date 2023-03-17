@@ -1,6 +1,6 @@
 package com.github.creoii.creolib.api.world.placement;
 
-import com.github.creoii.creolib.core.registry.StructurePlacementTypeRegistry;
+import com.github.creoii.creolib.api.registry.StructurePlacementTypeRegistry;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.util.math.BlockPos;

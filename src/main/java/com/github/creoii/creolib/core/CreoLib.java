@@ -1,7 +1,7 @@
 package com.github.creoii.creolib.core;
 
 import com.github.creoii.creolib.api.tag.CBiomeTags;
-import com.github.creoii.creolib.core.registry.*;
+import com.github.creoii.creolib.api.registry.*;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;

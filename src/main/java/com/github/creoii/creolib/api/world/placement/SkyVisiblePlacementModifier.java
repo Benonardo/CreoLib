@@ -1,6 +1,6 @@
 package com.github.creoii.creolib.api.world.placement;
 
-import com.github.creoii.creolib.core.registry.PlacementModifierRegistry;
+import com.github.creoii.creolib.api.registry.PlacementModifierRegistry;
 import com.mojang.serialization.Codec;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;

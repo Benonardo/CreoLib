@@ -1,6 +1,6 @@
 package com.github.creoii.creolib.api.world.placement;
 
-import com.github.creoii.creolib.core.registry.PlacementModifierRegistry;
+import com.github.creoii.creolib.api.registry.PlacementModifierRegistry;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.registry.entry.RegistryEntry;

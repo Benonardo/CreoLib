@@ -1,6 +1,6 @@
 package com.github.creoii.creolib.mixin.server;
 
-import com.github.creoii.creolib.core.registry.AttributeRegistry;
+import com.github.creoii.creolib.api.registry.AttributeRegistry;
 import net.minecraft.server.network.ServerPlayNetworkHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.math.MathHelper;
