@@ -26,10 +26,10 @@ public class BackgroundRendererMixin {
         RegistryEntry<Biome> registryEntry = entity.world.getBiome(entity.getBlockPos());
         if (registryEntry.getKey().isPresent()) {
             RegistryKey<Biome> biomeKey = registryEntry.getKey().get();
-            if (BiomeFogModifier.BIOME_FOG_MODIFIERS.containsKey(biomeKey)) {
-                BiomeFogModifier modifier = BiomeFogModifier.BIOME_FOG_MODIFIERS.get(biomeKey);
-                fogData.fogStart = modifier.fogStart().apply(new BiomeFogModifier.FogFunction((ClientWorld) entity.world, entity, viewDistance, tickDelta));
-                fogData.fogEnd = modifier.fogEnd().apply(new BiomeFogModifier.FogFunction((ClientWorld) entity.world, entity, viewDistance, tickDelta));
+            if (BiomeFogModifier.getBiomeFogModifiers().containsKey(biomeKey)) {
+                BiomeFogModifier modifier = BiomeFogModifier.getBiomeFogModifiers().get(biomeKey);
+                fogData.fogStart = modifier.fogStart().apply(new BiomeFogModifier.FogFunction(camera, (ClientWorld) entity.world, entity, viewDistance, tickDelta));
+                fogData.fogEnd = modifier.fogEnd().apply(new BiomeFogModifier.FogFunction(camera, (ClientWorld) entity.world, entity, viewDistance, tickDelta));
                 fogData.fogShape = modifier.fogShape();
                 RenderSystem.setShaderFogStart(fogData.fogStart);
                 RenderSystem.setShaderFogEnd(fogData.fogEnd);

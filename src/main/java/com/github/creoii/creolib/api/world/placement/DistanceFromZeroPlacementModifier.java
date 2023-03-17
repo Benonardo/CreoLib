@@ -11,21 +11,20 @@ import net.minecraft.world.gen.placementmodifier.AbstractConditionalPlacementMod
 import net.minecraft.world.gen.placementmodifier.PlacementModifierType;
 
 public class DistanceFromZeroPlacementModifier extends AbstractConditionalPlacementModifier {
-    private static final Random RANDOM = Random.create();
     public static final Codec<DistanceFromZeroPlacementModifier> CODEC = RecordCodecBuilder.create(instance -> {
-        return instance.group(Codec.INT.fieldOf("min_squared_distance").forGetter(predicate -> {
-            return predicate.minSquaredDistance;
+        return instance.group(Codec.INT.fieldOf("threshold").forGetter(predicate -> {
+            return predicate.threshold;
         })).apply(instance, DistanceFromZeroPlacementModifier::new);
     });
-    private final int minSquaredDistance;
+    private final int threshold;
 
-    public DistanceFromZeroPlacementModifier(int minSquaredDistance) {
-        this.minSquaredDistance = minSquaredDistance;
+    public DistanceFromZeroPlacementModifier(int threshold) {
+        this.threshold = threshold;
     }
 
     @Override
     public boolean shouldPlace(FeaturePlacementContext context, Random random, BlockPos pos) {
-        return new Vec3d(pos.getX(), 0, pos.getZ()).squaredDistanceTo(Vec3d.ZERO) >= minSquaredDistance;
+        return context.getWorld().getChunk(pos).getPos().getStartPos().getSquaredDistance(Vec3d.ZERO) >= threshold;
     }
 
     @Override

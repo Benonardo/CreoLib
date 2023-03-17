@@ -39,10 +39,10 @@ public class OffsetPlacementModifier extends PlacementModifier {
 
     @Override
     public Stream<BlockPos> getPositions(FeaturePlacementContext context, Random random, BlockPos pos) {
-        int i = offsetX.get(random);
-        int j = offsetY.get(random);
-        int k = offsetZ.get(random);
-        return Stream.of(pos.add(i, j, k));
+        int i = offsetX.get(random) + pos.getX();
+        int j = offsetY.get(random) + pos.getY();
+        int k = offsetZ.get(random) + pos.getZ();
+        return Stream.of(new BlockPos(i, j, k));
     }
 
     @Override

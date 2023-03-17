@@ -19,8 +19,6 @@ import net.minecraft.world.gen.structure.Structure;
 import org.apache.commons.lang3.mutable.MutableBoolean;
 
 /**
- * Squared distance should be less than or equal to searchRadius * 16
- * -
  * This placement modifier should be last, because it is resource intensive
  */
 public class NearStructurePlacementModifier extends AbstractConditionalPlacementModifier {
@@ -40,7 +38,7 @@ public class NearStructurePlacementModifier extends AbstractConditionalPlacement
         this.structures = structures;
         // limit to 4 chunks, because any higher amount has detrimental effects on world loading times - even this is pushing it
         this.squaredDistance = Math.min(squaredDistance, 4096);
-        this.searchRadius = ((int) Math.sqrt(this.squaredDistance)) >> 4;
+        this.searchRadius = ((int) Math.sqrt(squaredDistance)) >> 4;
     }
 
     @Override

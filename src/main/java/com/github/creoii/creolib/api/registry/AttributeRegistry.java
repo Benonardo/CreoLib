@@ -8,12 +8,12 @@ import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 
 public final class AttributeRegistry {
-    public static final EntityAttribute GENERIC_GRAVITY = new ClampedEntityAttribute("attribute.name.generic.gravity", .08d, -16d, 16d).setTracked(true);
+    public static final EntityAttribute GENERIC_GRAVITY = new ClampedEntityAttribute("attribute.name.generic.gravity", .08d, 0d, 16d).setTracked(true);
     public static final EntityAttribute GENERIC_SWIM_SPEED = new ClampedEntityAttribute("attribute.name.generic.swim_speed", 1d, 0d, 1024d).setTracked(true);
-    public static final EntityAttribute GENERIC_ATTACK_RANGE = new ClampedEntityAttribute("attribute.name.generic.attack_range", 3f, 0f, 256f).setTracked(true);
-    public static final EntityAttribute PLAYER_REACH_DISTANCE = new ClampedEntityAttribute("attribute.name.player.reach_distance", 4.5f, 0f, 256f).setTracked(true);
-    public static final EntityAttribute PLAYER_BLOCK_PLACE_SPEED = new ClampedEntityAttribute("attribute.name.player.block_place_speed", 4, 0, 256f).setTracked(true);
-    public static final EntityAttribute PLAYER_BLOCK_BREAK_SPEED = new ClampedEntityAttribute("attribute.name.player.block_break_speed", 5, 0, 256f).setTracked(true);
+    public static final EntityAttribute GENERIC_ATTACK_RANGE = new ClampedEntityAttribute("attribute.name.generic.attack_range", 3d, 0d, 256d).setTracked(true);
+    public static final EntityAttribute PLAYER_REACH_DISTANCE = new ClampedEntityAttribute("attribute.name.player.reach_distance", 4.5d, 0d, 256d).setTracked(true);
+    public static final EntityAttribute PLAYER_BLOCK_PLACE_SPEED = new ClampedEntityAttribute("attribute.name.player.block_place_speed", 4d, 0d, 256d).setTracked(true);
+    public static final EntityAttribute PLAYER_BLOCK_BREAK_SPEED = new ClampedEntityAttribute("attribute.name.player.block_break_speed", 5d, 0d, 256d).setTracked(true);
 
     public static void register() {
         Registry.register(Registries.ATTRIBUTE, new Identifier(CreoLib.NAMESPACE, "generic.gravity"), GENERIC_GRAVITY);

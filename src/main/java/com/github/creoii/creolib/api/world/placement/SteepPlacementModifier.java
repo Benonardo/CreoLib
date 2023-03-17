@@ -13,7 +13,7 @@ import net.minecraft.world.gen.placementmodifier.PlacementModifierType;
 
 public class SteepPlacementModifier extends AbstractConditionalPlacementModifier {
     public static final Codec<SteepPlacementModifier> CODEC = RecordCodecBuilder.create(instance -> {
-        return instance.group(Codec.intRange(1, 16).fieldOf("steepness").forGetter(predicate -> {
+        return instance.group(Codec.intRange(1, 16).fieldOf("steepness").orElse(4).forGetter(predicate -> {
             return predicate.steepness;
         })).apply(instance, SteepPlacementModifier::new);
     });
