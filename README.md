@@ -1,6 +1,6 @@
 # CreoLib
  
-```
+```gradle
 repositories {
     maven {
         url = uri "https://api.modrinth.com/maven"
