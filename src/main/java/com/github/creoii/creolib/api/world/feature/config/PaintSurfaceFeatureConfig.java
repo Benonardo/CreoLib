@@ -11,7 +11,7 @@ import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 /**
  * @param noiseEntry noise function to use, defined in data/namespace/worldgen/fast_noise
  * @param state stateProvider to pick blockstates from
- * @param threshold noise value threshold; any value <= threshold results in a block placed
+ * @param threshold noise value threshold; any value less than or equal to threshold results in a block placed
  * @param yOffset optional amount to offset y value; defaults to 0
  */
 public record PaintSurfaceFeatureConfig(RegistryEntry<FastNoiseLite> noiseEntry, BlockStateProvider state, float threshold, int yOffset) implements FeatureConfig {
