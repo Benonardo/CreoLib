@@ -11,10 +11,6 @@ import net.minecraft.world.gen.feature.FeaturePlacementContext;
 import net.minecraft.world.gen.placementmodifier.AbstractConditionalPlacementModifier;
 import net.minecraft.world.gen.placementmodifier.PlacementModifierType;
 
-/**
- * After square placement
- * This code was taken from {@link net.minecraft.world.gen.surfacebuilder.VanillaSurfaceRules}
- */
 public class SteepPlacementModifier extends AbstractConditionalPlacementModifier {
     public static final Codec<SteepPlacementModifier> CODEC = RecordCodecBuilder.create(instance -> {
         return instance.group(Codec.intRange(1, 16).fieldOf("steepness").forGetter(predicate -> {

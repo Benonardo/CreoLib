@@ -17,6 +17,7 @@ public final class PlacementModifierRegistry {
     public static final PlacementModifierType<DensityFunctionPlacementModifier> DENSITY_FUNCTION = () -> DensityFunctionPlacementModifier.CODEC;
     public static final PlacementModifierType<NearStructurePlacementModifier> NEAR_STRUCTURE = () -> NearStructurePlacementModifier.CODEC;
     public static final PlacementModifierType<SkyVisiblePlacementModifier> SKY_VISIBLE = () -> SkyVisiblePlacementModifier.CODEC;
+    public static final PlacementModifierType<DistanceFromZeroPlacementModifier> DISTANCE_FROM_ZERO = () -> DistanceFromZeroPlacementModifier.CODEC;
 
     public static void register() {
         Registry.register(Registries.PLACEMENT_MODIFIER_TYPE, new Identifier(CreoLib.NAMESPACE, "noise"), NOISE);
@@ -28,5 +29,6 @@ public final class PlacementModifierRegistry {
         Registry.register(Registries.PLACEMENT_MODIFIER_TYPE, new Identifier(CreoLib.NAMESPACE, "density_function"), DENSITY_FUNCTION);
         Registry.register(Registries.PLACEMENT_MODIFIER_TYPE, new Identifier(CreoLib.NAMESPACE, "near_structure"), NEAR_STRUCTURE);
         Registry.register(Registries.PLACEMENT_MODIFIER_TYPE, new Identifier(CreoLib.NAMESPACE, "sky_visible"), SKY_VISIBLE);
+        Registry.register(Registries.PLACEMENT_MODIFIER_TYPE, new Identifier(CreoLib.NAMESPACE, "distance_from_zero"), DISTANCE_FROM_ZERO);
     }
 }
