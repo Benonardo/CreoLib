@@ -1,6 +1,5 @@
 package com.github.creoii.creolib.api.world;
 
-import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.world.biome.Biome;

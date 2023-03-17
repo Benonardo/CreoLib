@@ -3,7 +3,6 @@ package com.github.creoii.creolib.api.world.feature;
 import com.github.creoii.creolib.api.world.feature.config.PaintSurfaceFeatureConfig;
 import com.github.creoii.creolib.core.noise.FastNoiseLite;
 import com.mojang.serialization.Codec;
-import net.minecraft.block.Block;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.Heightmap;

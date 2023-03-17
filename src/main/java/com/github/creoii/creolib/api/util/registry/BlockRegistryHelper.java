@@ -3,7 +3,7 @@ package com.github.creoii.creolib.api.util.registry;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.registry.*;
 import net.fabricmc.fabric.mixin.object.builder.AbstractBlockAccessor;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemGroup;

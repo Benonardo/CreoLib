@@ -1,4 +1,4 @@
-package com.github.creoii.creolib.core.registry;
+package com.github.creoii.creolib.api.registry;
 
 import com.github.creoii.creolib.api.world.placement.DistanceFromZeroStructurePlacement;
 import com.github.creoii.creolib.api.world.placement.FastNoiseStructurePlacement;

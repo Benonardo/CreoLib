@@ -1,6 +1,6 @@
 package com.github.creoii.creolib.mixin.client.render;
 
-import com.github.creoii.creolib.core.registry.AttributeRegistry;
+import com.github.creoii.creolib.api.registry.AttributeRegistry;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;

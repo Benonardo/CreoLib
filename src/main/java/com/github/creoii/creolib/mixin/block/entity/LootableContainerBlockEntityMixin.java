@@ -1,6 +1,6 @@
 package com.github.creoii.creolib.mixin.block.entity;
 
-import com.github.creoii.creolib.core.registry.AttributeRegistry;
+import com.github.creoii.creolib.api.registry.AttributeRegistry;
 import net.minecraft.block.entity.LootableContainerBlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.MathHelper;

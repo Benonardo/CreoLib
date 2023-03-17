@@ -1,13 +1,11 @@
 package com.github.creoii.creolib.api.util.registry;
 
-import com.github.creoii.creolib.api.util.BlockUtil;
 import com.github.creoii.creolib.core.duck.AbstractBlockDuck;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.LandPathNodeTypesRegistry;
 import net.fabricmc.fabric.mixin.content.registry.AxeItemAccessor;
 import net.fabricmc.fabric.mixin.content.registry.ShovelItemAccessor;
 import net.minecraft.block.*;
-import net.minecraft.fluid.Fluid;
 import net.minecraft.item.HoneycombItem;
 
 public class CBlockSettings extends FabricBlockSettings {
