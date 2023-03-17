@@ -16,25 +16,43 @@ import java.util.Optional;
 public final class TagUtil {
     public static boolean isEnchantmentIn(Enchantment enchantment, RegistryEntryList<Enchantment> entryList) {
         RegistryEntry<Enchantment> entry = Registries.ENCHANTMENT.getEntry(enchantment);
-        Optional<TagKey<Enchantment>> tag = entryList.getTagKey();
-        if (entry.hasKeyAndValue() && tag.isPresent()) {
-            return entry.isIn(tag.get());
+        if (entry.hasKeyAndValue()) {
+            return entryList.contains(entry);
+        } return false;
+    }
+
+    public static boolean isEnchantmentIn(Enchantment enchantment, TagKey<Enchantment> tag) {
+        RegistryEntry<Enchantment> entry = Registries.ENCHANTMENT.getEntry(enchantment);
+        if (entry.hasKeyAndValue()) {
+            return entry.isIn(tag);
         } return false;
     }
 
     public static boolean isStatusEffectIn(StatusEffect statusEffect, RegistryEntryList<StatusEffect> entryList) {
         RegistryEntry<StatusEffect> entry = Registries.STATUS_EFFECT.getEntry(statusEffect);
-        Optional<TagKey<StatusEffect>> tag = entryList.getTagKey();
-        if (entry.hasKeyAndValue() && tag.isPresent()) {
-            return entry.isIn(tag.get());
+        if (entry.hasKeyAndValue()) {
+            return entryList.contains(entry);
+        } return false;
+    }
+
+    public static boolean isStatusEffectIn(StatusEffect statusEffect, TagKey<StatusEffect> tag) {
+        RegistryEntry<StatusEffect> entry = Registries.STATUS_EFFECT.getEntry(statusEffect);
+        if (entry.hasKeyAndValue()) {
+            return entry.isIn(tag);
         } return false;
     }
 
     public static boolean isPaintingIn(PaintingVariant painting, RegistryEntryList<PaintingVariant> entryList) {
         RegistryEntry<PaintingVariant> entry = Registries.PAINTING_VARIANT.getEntry(painting);
-        Optional<TagKey<PaintingVariant>> tag = entryList.getTagKey();
-        if (entry.hasKeyAndValue() && tag.isPresent()) {
-            return entry.isIn(tag.get());
+        if (entry.hasKeyAndValue()) {
+            return entryList.contains(entry);
+        } return false;
+    }
+
+    public static boolean isPaintingIn(PaintingVariant painting, TagKey<PaintingVariant> tag) {
+        RegistryEntry<PaintingVariant> entry = Registries.PAINTING_VARIANT.getEntry(painting);
+        if (entry.hasKeyAndValue()) {
+            return entry.isIn(tag);
         } return false;
     }
 
