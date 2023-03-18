@@ -32,7 +32,7 @@ public class CFoodComponent extends FoodComponent {
         private boolean meat;
         private boolean alwaysEdible;
         private boolean snack;
-        private int eatTime;
+        private int eatTime = 32;
         private final List<Pair<StatusEffectInstance, Float>> statusEffects = Lists.newArrayList();
 
         public CFoodComponent.Builder hunger(int hunger) {

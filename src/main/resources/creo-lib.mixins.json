@@ -29,6 +29,7 @@
     "enchantment.EnchantmentMixin",
     "entity.CreeperEntityMixin",
     "entity.EntityMixin",
+    "entity.ItemEntityMixin",
     "entity.LivingEntityMixin",
     "entity.PlayerEntityMixin",
     "entity.PlayerInventoryMixin",

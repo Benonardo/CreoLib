@@ -3,6 +3,7 @@ package com.github.creoii.creolib.api.util;
 import com.github.creoii.creolib.api.util.registry.CBlockSettings;
 import com.github.creoii.creolib.api.util.registry.DripSettings;
 import com.github.creoii.creolib.api.util.registry.FireSettings;
+import com.github.creoii.creolib.api.util.registry.TillingSettings;
 import com.github.creoii.creolib.mixin.block.BlockSettingsAccessor;
 import net.fabricmc.fabric.api.registry.LandPathNodeTypesRegistry;
 import net.minecraft.block.AbstractBlock;
@@ -330,6 +331,20 @@ public final class BlockUtil {
      */
     public static DripSettings getDripSettings(Block block) {
         return getOrCreateSettings(block).getDripSettings();
+    }
+
+    /**
+     * Sets the {@link TillingSettings} of the {@param block}
+     */
+    public static void setTillingSettings(Block block, TillingSettings tillingSettings) {
+        BLOCK_SETTINGS_REPLACED.replace(block, getOrCreateSettings(block).tillingSettings(tillingSettings));
+    }
+
+    /**
+     * Returns the {@link TillingSettings} of the {@param block}
+     */
+    public static TillingSettings getTillingSettings(Block block) {
+        return getOrCreateSettings(block).getTillingSettings();
     }
 
     /**

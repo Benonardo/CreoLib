@@ -1,12 +1,11 @@
 package com.github.creoii.creolib.mixin.server;
 
 import com.github.creoii.creolib.api.tag.CBlockTags;
-import com.github.creoii.creolib.api.util.Tickable;
-import com.github.creoii.creolib.api.world.ServerWorldTicker;
+import com.github.creoii.creolib.api.util.ticking.Ticker;
+import net.fabricmc.api.EnvType;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -19,11 +18,10 @@ import java.util.function.BooleanSupplier;
 public class ServerWorldMixin {
     @Inject(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/village/raid/RaidManager;tick()V", shift = At.Shift.AFTER))
     private void creo_lib_applyServerWorldTickers(BooleanSupplier shouldKeepTicking, CallbackInfo ci) {
-        ServerWorldTicker.TICKERS.forEach(ticker -> {
-            ticker.tick((ServerWorld) (Object) this);
-        });
-        Tickable.TICKERS.forEach(tickable -> {
-            tickable.tick((World) (Object) this);
+        Ticker.TICKERS.forEach(ticker -> {
+            if (ticker.environment() != Ticker.Environment.CLIENT) {
+                ticker.tickable().tick((ServerWorld) (Object) this);
+            }
         });
     }
 

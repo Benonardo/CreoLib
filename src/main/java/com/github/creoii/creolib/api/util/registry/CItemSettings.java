@@ -12,6 +12,7 @@ public class CItemSettings extends FabricItemSettings {
     private boolean farmerCompostable;
     private int villagerFoodValue;
     private int pickupDelay;
+    private int despawnTime = 6000;
 
     public CItemSettings compostingChance(float chance) {
         compostingChance = chance;
@@ -53,6 +54,11 @@ public class CItemSettings extends FabricItemSettings {
         return this;
     }
 
+    public CItemSettings despawnTime(int despawnTime) {
+        this.despawnTime = despawnTime;
+        return this;
+    }
+
     public float getCompostingChance() {
         return compostingChance;
     }
@@ -83,5 +89,9 @@ public class CItemSettings extends FabricItemSettings {
 
     public int getPickupDelay() {
         return pickupDelay;
+    }
+
+    public int getDespawnTime() {
+        return despawnTime;
     }
 }

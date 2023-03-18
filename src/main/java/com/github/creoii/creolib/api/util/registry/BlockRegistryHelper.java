@@ -20,6 +20,10 @@ public final class BlockRegistryHelper {
         if (((AbstractBlockAccessor) block).getSettings() instanceof CBlockSettings settings) {
             if (settings.getFireSettings() != null)
                 FlammableBlockRegistry.getDefaultInstance().add(block, settings.getFireSettings().burnChance(), settings.getFireSettings().spreadChance());
+            if (settings.getTillingSettings() != null) {
+                TillingSettings tillingSettings = settings.getTillingSettings();
+                TillableBlockRegistry.register(block, tillingSettings.usagePredicate(), tillingSettings.tilled(), tillingSettings.droppedItem());
+            }
             if (settings.getStrippedBlock() != null)
                 StrippableBlockRegistry.register(block, settings.getStrippedBlock());
             if (settings.getFlattenedState() != null)

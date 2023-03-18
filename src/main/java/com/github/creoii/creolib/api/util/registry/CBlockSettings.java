@@ -11,6 +11,7 @@ import net.minecraft.item.HoneycombItem;
 public class CBlockSettings extends FabricBlockSettings {
     private FireSettings fireSettings;
     private DripSettings dripSettings;
+    private TillingSettings tillingSettings;
     private Block strippedBlock;
     private BlockState flattenedState;
     private LandPathNodeTypesRegistry.PathNodeTypeProvider pathNodeProvider;
@@ -39,6 +40,7 @@ public class CBlockSettings extends FabricBlockSettings {
         settings.jumpVelocityMultiplier(block.getVelocityMultiplier());
         settings.fireSettings(((AbstractBlockDuck) block).getFireSettings());
         settings.dripSettings(((AbstractBlockDuck) block).getDripSettings());
+        settings.tillingSettings(((AbstractBlockDuck) block).getTillingSettings());
         settings.strippedBlock(AxeItemAccessor.getStrippedBlocks().get(block));
         settings.flattenedState(ShovelItemAccessor.getPathStates().get(block));
         LandPathNodeTypesRegistry.PathNodeTypeProvider provider = LandPathNodeTypesRegistry.getPathNodeTypeProvider(block);
@@ -62,13 +64,18 @@ public class CBlockSettings extends FabricBlockSettings {
         return this;
     }
 
+    public CBlockSettings tillingSettings(TillingSettings tillingSettings) {
+        this.tillingSettings = tillingSettings;
+        return this;
+    }
+
     public CBlockSettings strippedBlock(Block strippedBlock) {
         this.strippedBlock = strippedBlock;
         return this;
     }
 
-    public CBlockSettings flattenedState(BlockState state) {
-        this.flattenedState = state;
+    public CBlockSettings flattenedState(BlockState flattened) {
+        this.flattenedState = flattened;
         return this;
     }
 
@@ -98,6 +105,10 @@ public class CBlockSettings extends FabricBlockSettings {
 
     public DripSettings getDripSettings() {
         return dripSettings;
+    }
+
+    public TillingSettings getTillingSettings() {
+        return tillingSettings;
     }
 
     public Block getStrippedBlock() {
