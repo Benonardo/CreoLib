@@ -4,5 +4,6 @@
   "attribute.name.generic.attack_range": "Attack Range",
   "attribute.name.player.reach_distance": "Reach Distance",
   "attribute.name.player.block_place_cooldown": "Block Place Cooldown",
-  "attribute.name.player.block_break_cooldown": "Block Break Cooldown"
+  "attribute.name.player.block_break_cooldown": "Block Break Cooldown",
+  "attribute.name.player.flight_speed": "Flight Speed"
 }

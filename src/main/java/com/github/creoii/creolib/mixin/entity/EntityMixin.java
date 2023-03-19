@@ -10,6 +10,9 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MovementType;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.damage.DamageType;
+import net.minecraft.entity.damage.DamageTypes;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.math.BlockPos;
@@ -21,6 +24,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import java.util.Optional;
 
 @Mixin(Entity.class)
 public abstract class EntityMixin {
@@ -41,24 +46,24 @@ public abstract class EntityMixin {
     @Shadow public abstract boolean isSpectator();
     @Shadow protected boolean onGround;
     @Shadow public boolean noClip;
-    private static final ImmutableMap<DamageSource, TagKey<EntityType<?>>> DAMAGE_IMMUNITIES = new ImmutableMap.Builder<DamageSource, TagKey<EntityType<?>>>()
-            .put(DamageSource.GENERIC, CEntityTypeTags.GENERIC_IMMUNE)
-            .put(DamageSource.FALL, CEntityTypeTags.FALL_IMMUNE)
-            .put(DamageSource.CACTUS, CEntityTypeTags.CACTUS_IMMUNE)
-            .put(DamageSource.SWEET_BERRY_BUSH, CEntityTypeTags.SWEET_BERRY_BUSH_IMMUNE)
-            .put(DamageSource.STALAGMITE, CEntityTypeTags.DRIPSTONE_IMMUNE)
-            .put(DamageSource.LIGHTNING_BOLT, CEntityTypeTags.LIGHTNING_IMMUNE)
-            .put(DamageSource.WITHER, CEntityTypeTags.WITHER_IMMUNE)
-            .put(DamageSource.MAGIC, CEntityTypeTags.MAGIC_IMMUNE)
-            .put(DamageSource.DROWN, CEntityTypeTags.DROWNING_IMMUNE)
-            .put(DamageSource.IN_FIRE, CEntityTypeTags.FIRE_IMMUNE)
-            .put(DamageSource.ON_FIRE, CEntityTypeTags.FIRE_IMMUNE)
-            .put(DamageSource.IN_WALL, CEntityTypeTags.SUFFOCATION_IMMUNE)
-            .put(DamageSource.FLY_INTO_WALL, CEntityTypeTags.FLY_INTO_WALL_IMMUNE)
-            .put(DamageSource.STARVE, CEntityTypeTags.STARVATION_IMMUNE)
-            .put(DamageSource.CRAMMING, CEntityTypeTags.CRAMMING_IMMUNE)
-            .put(DamageSource.OUT_OF_WORLD, CEntityTypeTags.OUT_OF_WORLD_IMMUNE)
-            .put(DamageSource.DRYOUT, CEntityTypeTags.DRYOUT_IMMUNE)
+    private static final ImmutableMap<RegistryKey<DamageType>, TagKey<EntityType<?>>> DAMAGE_IMMUNITIES = new ImmutableMap.Builder<RegistryKey<DamageType>, TagKey<EntityType<?>>>()
+            .put(DamageTypes.GENERIC, CEntityTypeTags.GENERIC_IMMUNE)
+            .put(DamageTypes.FALL, CEntityTypeTags.FALL_IMMUNE)
+            .put(DamageTypes.CACTUS, CEntityTypeTags.CACTUS_IMMUNE)
+            .put(DamageTypes.SWEET_BERRY_BUSH, CEntityTypeTags.SWEET_BERRY_BUSH_IMMUNE)
+            .put(DamageTypes.STALAGMITE, CEntityTypeTags.DRIPSTONE_IMMUNE)
+            .put(DamageTypes.LIGHTNING_BOLT, CEntityTypeTags.LIGHTNING_IMMUNE)
+            .put(DamageTypes.WITHER, CEntityTypeTags.WITHER_IMMUNE)
+            .put(DamageTypes.MAGIC, CEntityTypeTags.MAGIC_IMMUNE)
+            .put(DamageTypes.DROWN, CEntityTypeTags.DROWNING_IMMUNE)
+            .put(DamageTypes.IN_FIRE, CEntityTypeTags.FIRE_IMMUNE)
+            .put(DamageTypes.ON_FIRE, CEntityTypeTags.FIRE_IMMUNE)
+            .put(DamageTypes.IN_WALL, CEntityTypeTags.SUFFOCATION_IMMUNE)
+            .put(DamageTypes.FLY_INTO_WALL, CEntityTypeTags.FLY_INTO_WALL_IMMUNE)
+            .put(DamageTypes.STARVE, CEntityTypeTags.STARVATION_IMMUNE)
+            .put(DamageTypes.CRAMMING, CEntityTypeTags.CRAMMING_IMMUNE)
+            .put(DamageTypes.OUT_OF_WORLD, CEntityTypeTags.OUT_OF_WORLD_IMMUNE)
+            .put(DamageTypes.DRY_OUT, CEntityTypeTags.DRYOUT_IMMUNE)
             .build();
 
     @Inject(method = "tick", at = @At("HEAD"))
@@ -84,8 +89,9 @@ public abstract class EntityMixin {
 
     @Inject(method = "isInvulnerableTo", at = @At("HEAD"), cancellable = true)
     private void creo_lib_damageImmunities(DamageSource damageSource, CallbackInfoReturnable<Boolean> cir) {
-        if (DAMAGE_IMMUNITIES.containsKey(damageSource)) {
-            cir.setReturnValue(getType().isIn(DAMAGE_IMMUNITIES.get(damageSource)));
+        Optional<RegistryKey<DamageType>> damageTypeKey = damageSource.getTypeRegistryEntry().getKey();
+        if (damageTypeKey.isPresent() && DAMAGE_IMMUNITIES.containsKey(damageTypeKey.get())) {
+            cir.setReturnValue(getType().isIn(DAMAGE_IMMUNITIES.get(damageTypeKey.get())));
         }
     }
 

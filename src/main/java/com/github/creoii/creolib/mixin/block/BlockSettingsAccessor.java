@@ -8,7 +8,6 @@ import net.minecraft.sound.BlockSoundGroup;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
-import java.util.function.Function;
 import java.util.function.ToIntFunction;
 
 @Mixin(AbstractBlock.Settings.class)
@@ -33,8 +32,6 @@ public interface BlockSettingsAccessor {
     float getJumpVelocityMultiplier();
     @Accessor("opaque")
     boolean isOpaque();
-    @Accessor("offsetType")
-    Function<BlockState, AbstractBlock.OffsetType> getOffsetType();
     @Accessor("collidable")
     boolean isCollidable();
     @Accessor("allowsSpawningPredicate")

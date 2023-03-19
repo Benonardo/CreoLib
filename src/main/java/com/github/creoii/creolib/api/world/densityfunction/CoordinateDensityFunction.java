@@ -19,8 +19,8 @@ public abstract class CoordinateDensityFunction implements DensityFunction {
     }
 
     @Override
-    public void applyEach(double[] densities, EachApplier applier) {
-        applier.applyEach(densities, this);
+    public void fill(double[] densities, EachApplier applier) {
+        applier.fill(densities, this);
     }
 
     @Override

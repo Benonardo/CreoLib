@@ -17,7 +17,6 @@ import net.minecraft.world.BlockView;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.Function;
 
 public final class BlockUtil {
     public static final Map<Block, CBlockSettings> BLOCK_SETTINGS_REPLACED = new HashMap<>();
@@ -173,24 +172,10 @@ public final class BlockUtil {
     }
 
     /**
-     * Sets the offset type of the {@param block} based on its blockstate
-     */
-    public static void setOffsetType(Block block, Function<BlockState, AbstractBlock.OffsetType> offsetType) {
-        BLOCK_SETTINGS_REPLACED.replace(block, (CBlockSettings) getOrCreateSettings(block).offsetType(offsetType));
-    }
-
-    /**
      * Sets the offset type of the {@param block}
      */
     public static void setOffsetType(Block block, AbstractBlock.OffsetType offsetType) {
-        BLOCK_SETTINGS_REPLACED.replace(block, (CBlockSettings) getOrCreateSettings(block).offsetType(state -> offsetType));
-    }
-
-    /**
-     * Returns the offset type of the {@param block}
-     */
-    public static AbstractBlock.OffsetType getOffsetType(BlockState state) {
-        return ((BlockSettingsAccessor) getOrCreateSettings(state.getBlock())).getOffsetType().apply(state);
+        BLOCK_SETTINGS_REPLACED.replace(block, (CBlockSettings) getOrCreateSettings(block).offset(offsetType));
     }
 
     /**

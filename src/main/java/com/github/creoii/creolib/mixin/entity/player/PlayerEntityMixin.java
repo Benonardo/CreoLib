@@ -1,8 +1,8 @@
-package com.github.creoii.creolib.mixin.entity;
+package com.github.creoii.creolib.mixin.entity.player;
 
+import com.github.creoii.creolib.api.registry.AttributeRegistry;
 import com.github.creoii.creolib.api.util.registry.CItemSettings;
 import com.github.creoii.creolib.core.duck.ItemSettingsDuck;
-import com.github.creoii.creolib.api.registry.AttributeRegistry;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
@@ -17,6 +17,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
+import org.w3c.dom.Attr;
 
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntityMixin extends LivingEntity {
@@ -26,7 +27,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 
     @Inject(method = "createPlayerAttributes", at = @At("RETURN"), cancellable = true)
     private static void creo_lib_playerAttributes(CallbackInfoReturnable<DefaultAttributeContainer.Builder> cir) {
-        cir.setReturnValue(cir.getReturnValue().add(AttributeRegistry.PLAYER_REACH_DISTANCE).add(AttributeRegistry.PLAYER_BLOCK_PLACE_SPEED).add(AttributeRegistry.PLAYER_BLOCK_BREAK_SPEED));
+        cir.setReturnValue(cir.getReturnValue().add(AttributeRegistry.PLAYER_REACH_DISTANCE).add(AttributeRegistry.PLAYER_BLOCK_PLACE_SPEED).add(AttributeRegistry.PLAYER_BLOCK_BREAK_SPEED).add(AttributeRegistry.PLAYER_FLIGHT_SPEED));
     }
 
     @Inject(method = "dropItem(Lnet/minecraft/item/ItemStack;ZZ)Lnet/minecraft/entity/ItemEntity;", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/ItemEntity;setPickupDelay(I)V", shift = At.Shift.AFTER), locals = LocalCapture.CAPTURE_FAILSOFT)
@@ -39,5 +40,11 @@ public abstract class PlayerEntityMixin extends LivingEntity {
     @ModifyConstant(method = "attack(Lnet/minecraft/entity/Entity;)V", constant = @Constant(doubleValue = 9.0))
     private double creo_lib_attackRange(double attackRange) {
         return getAttributeValue(AttributeRegistry.PLAYER_REACH_DISTANCE);
+    }
+
+    @Inject(method = "getOffGroundSpeed", at = @At(value = "RETURN", ordinal = 0), cancellable = true)
+    private void creo_lib_flySpeedAttribute(CallbackInfoReturnable<Float> cir) {
+        float speed = (float) getAttributeValue(AttributeRegistry.PLAYER_FLIGHT_SPEED);
+        cir.setReturnValue(isSprinting() ? speed * 2f : speed);
     }
 }

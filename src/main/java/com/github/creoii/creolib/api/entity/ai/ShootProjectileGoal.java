@@ -95,7 +95,7 @@ public class ShootProjectileGoal extends Goal {
                         }
 
                         for (int i = 0; i < 1; ++i) {
-                            ProjectileEntity projectileEntity = projectileType.create((ServerWorld) mob.world, null, null, new BlockPos(mob.getX(), mob.getBodyY(.5d) + .5d, mob.getZ()), SpawnReason.NATURAL, false, false);
+                            ProjectileEntity projectileEntity = projectileType.create((ServerWorld) mob.world, null, null, new BlockPos(mob.getBlockX(), (int) (mob.getBodyY(.5d) + .5d), mob.getBlockZ()), SpawnReason.NATURAL, false, false);
                             if (projectileEntity != null) {
                                 projectileEntity.setVelocity(mob.getRandom().nextTriangular(e, 2.297d * h), f, mob.getRandom().nextTriangular(g, 2.297d * h));
                                 mob.world.spawnEntity(projectileEntity);

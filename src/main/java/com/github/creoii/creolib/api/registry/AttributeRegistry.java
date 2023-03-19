@@ -14,6 +14,7 @@ public final class AttributeRegistry {
     public static final EntityAttribute PLAYER_REACH_DISTANCE = new ClampedEntityAttribute("attribute.name.player.reach_distance", 4.5d, 0d, 256d).setTracked(true);
     public static final EntityAttribute PLAYER_BLOCK_PLACE_SPEED = new ClampedEntityAttribute("attribute.name.player.block_place_speed", 4d, 0d, 256d).setTracked(true);
     public static final EntityAttribute PLAYER_BLOCK_BREAK_SPEED = new ClampedEntityAttribute("attribute.name.player.block_break_speed", 5d, 0d, 256d).setTracked(true);
+    public static final EntityAttribute PLAYER_FLIGHT_SPEED = new ClampedEntityAttribute("attribute.name.player.flight_speed", .05d, 0d, 1024d).setTracked(true);
 
     public static void register() {
         Registry.register(Registries.ATTRIBUTE, new Identifier(CreoLib.NAMESPACE, "generic.gravity"), GENERIC_GRAVITY);
@@ -22,5 +23,6 @@ public final class AttributeRegistry {
         Registry.register(Registries.ATTRIBUTE, new Identifier(CreoLib.NAMESPACE, "player.reach_distance"), PLAYER_REACH_DISTANCE);
         Registry.register(Registries.ATTRIBUTE, new Identifier(CreoLib.NAMESPACE, "player.block_place_cooldown"), PLAYER_BLOCK_PLACE_SPEED);
         Registry.register(Registries.ATTRIBUTE, new Identifier(CreoLib.NAMESPACE, "player.block_break_cooldown"), PLAYER_BLOCK_BREAK_SPEED);
+        Registry.register(Registries.ATTRIBUTE, new Identifier(CreoLib.NAMESPACE, "player.flight_speed"), PLAYER_FLIGHT_SPEED);
     }
 }

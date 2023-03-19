@@ -1,4 +1,4 @@
-package com.github.creoii.creolib.mixin.entity;
+package com.github.creoii.creolib.mixin.entity.player;
 
 import com.github.creoii.creolib.api.registry.AttributeRegistry;
 import net.minecraft.entity.player.PlayerEntity;

@@ -17,14 +17,15 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(InGameHud.class)
 @Environment(EnvType.CLIENT)
 public abstract class InGameHudMixin {
-    @Shadow protected abstract void renderOverlay(Identifier texture, float opacity);
     @Shadow @Final private MinecraftClient client;
+
+    @Shadow protected abstract void renderOverlay(MatrixStack matrices, Identifier texture, float opacity);
 
     @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/math/MathHelper;lerp(FFF)F", ordinal = 0, shift = At.Shift.AFTER))
     private void creo_lib_overlayRenderers(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
         OverlayRenderer.OVERLAY_RENDERERS.forEach(renderer -> {
             if (renderer.condition(client, client.player))
-                renderOverlay(renderer.getTexture(), renderer.getOpacity(client, client.player));
+                renderOverlay(matrices, renderer.getTexture(), renderer.getOpacity(client, client.player));
         });
     }
 }

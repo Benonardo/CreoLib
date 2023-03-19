@@ -1,7 +1,7 @@
 package com.github.creoii.creolib.core;
 
-import com.github.creoii.creolib.api.tag.CBiomeTags;
 import com.github.creoii.creolib.api.registry.*;
+import com.github.creoii.creolib.api.tag.CBiomeTags;
 import net.fabricmc.api.ModInitializer;
 
 public final class CreoLib implements ModInitializer {

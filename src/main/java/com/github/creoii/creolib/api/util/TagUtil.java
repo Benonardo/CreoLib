@@ -11,7 +11,6 @@ import net.minecraft.registry.tag.TagKey;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public final class TagUtil {
     public static boolean isEnchantmentIn(Enchantment enchantment, RegistryEntryList<Enchantment> entryList) {

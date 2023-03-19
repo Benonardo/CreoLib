@@ -41,8 +41,8 @@ public record SwapDensityFunction(DensityFunction input, SwapType swapType) impl
     }
 
     @Override
-    public void applyEach(double[] densities, EachApplier applier) {
-        applier.applyEach(densities, this);
+    public void fill(double[] densities, EachApplier applier) {
+        applier.fill(densities, this);
     }
 
     @Override

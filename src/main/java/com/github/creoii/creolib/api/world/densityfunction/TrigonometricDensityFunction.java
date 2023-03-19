@@ -26,8 +26,8 @@ public abstract class TrigonometricDensityFunction implements DensityFunction {
     }
 
     @Override
-    public void applyEach(double[] densities, EachApplier applier) {
-        input.applyEach(densities, applier);
+    public void fill(double[] densities, EachApplier applier) {
+        input.fill(densities, applier);
         switch (this.type) {
             case SIN -> {
                 for (int i = 0; i < densities.length; ++i) {

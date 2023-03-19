@@ -1,7 +1,7 @@
 package com.github.creoii.creolib.api.world.densityfunction;
 
-import com.github.creoii.creolib.core.noise.FastNoiseLite;
 import com.github.creoii.creolib.api.registry.FastNoiseParametersRegistry;
+import com.github.creoii.creolib.core.noise.FastNoiseLite;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.registry.entry.RegistryEntry;
@@ -43,8 +43,8 @@ public class FastNoiseDensityFunction implements DensityFunction {
     }
 
     @Override
-    public void applyEach(double[] densities, DensityFunction.EachApplier applier) {
-        applier.applyEach(densities, this);
+    public void fill(double[] densities, EachApplier applier) {
+        applier.fill(densities, this);
     }
 
     @Override

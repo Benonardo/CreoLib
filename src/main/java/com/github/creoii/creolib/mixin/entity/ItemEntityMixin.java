@@ -2,7 +2,6 @@ package com.github.creoii.creolib.mixin.entity;
 
 import com.github.creoii.creolib.api.util.registry.CItemSettings;
 import com.github.creoii.creolib.core.duck.ItemSettingsDuck;
-import com.github.creoii.creolib.mixin.item.ItemSettingsAccessor;
 import net.minecraft.entity.ItemEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;

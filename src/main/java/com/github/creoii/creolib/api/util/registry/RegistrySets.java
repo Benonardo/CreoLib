@@ -4,7 +4,6 @@ import net.minecraft.block.*;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemGroups;
 import net.minecraft.sound.BlockSoundGroup;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.Nullable;
@@ -26,6 +25,8 @@ public final class RegistrySets {
     }
 
     public static WoodSet createWoodSet(String namespace, String name, MapColor barkColor, MapColor woodColor, @Nullable ItemConvertible after, @Nullable ItemConvertible logAfter, boolean includeLogs) {
+        BlockSetType blockSetType = BlockSetType.register(new BlockSetType(name));
+        WoodType woodType = new WoodType(name, blockSetType);
         Block strippedLog = null;
         Block log = null;
         Block strippedWood = null;
@@ -40,15 +41,15 @@ public final class RegistrySets {
         Block slab = new SlabBlock(CBlockSettings.copy(planks));
         Block stairs = new StairsBlock(planks.getDefaultState(), CBlockSettings.copy(planks));
         Block fence = new FenceBlock(CBlockSettings.copy(planks));
-        Block fenceGate = new FenceGateBlock(CBlockSettings.copy(planks), SoundEvents.BLOCK_FENCE_GATE_CLOSE, SoundEvents.BLOCK_FENCE_GATE_OPEN);
-        Block button = new ButtonBlock(CBlockSettings.copy(planks), 30, true, SoundEvents.BLOCK_WOODEN_BUTTON_CLICK_OFF, SoundEvents.BLOCK_WOODEN_BUTTON_CLICK_ON);
-        Block pressurePlate = new PressurePlateBlock(PressurePlateBlock.ActivationRule.EVERYTHING, CBlockSettings.copy(planks), SoundEvents.BLOCK_WOODEN_PRESSURE_PLATE_CLICK_OFF, SoundEvents.BLOCK_WOODEN_PRESSURE_PLATE_CLICK_ON);
-        Block door = new DoorBlock(CBlockSettings.copy(planks).strength(3f).sounds(BlockSoundGroup.WOOD).nonOpaque(), SoundEvents.BLOCK_WOODEN_DOOR_CLOSE, SoundEvents.BLOCK_WOODEN_DOOR_OPEN);
-        Block trapdoor = new TrapdoorBlock(CBlockSettings.copy(planks).strength(3f).nonOpaque().allowsSpawning((state, world, pos, type) -> false), SoundEvents.BLOCK_WOODEN_TRAPDOOR_CLOSE, SoundEvents.BLOCK_WOODEN_TRAPDOOR_OPEN);
-        return new WoodSet(namespace, name, after, logAfter, log, strippedLog, wood, strippedWood, planks, stairs, slab, fence, fenceGate, button, pressurePlate, door, trapdoor);
+        Block fenceGate = new FenceGateBlock(CBlockSettings.copy(planks), woodType);
+        Block button = new ButtonBlock(CBlockSettings.copy(planks), blockSetType, 30, true);
+        Block pressurePlate = new PressurePlateBlock(PressurePlateBlock.ActivationRule.EVERYTHING, CBlockSettings.copy(planks), blockSetType);
+        Block door = new DoorBlock(CBlockSettings.copy(planks).strength(3f).sounds(BlockSoundGroup.WOOD).nonOpaque(), blockSetType);
+        Block trapdoor = new TrapdoorBlock(CBlockSettings.copy(planks).strength(3f).nonOpaque().allowsSpawning((state, world, pos, type) -> false), blockSetType);
+        return new WoodSet(namespace, name, woodType, after, logAfter, log, strippedLog, wood, strippedWood, planks, stairs, slab, fence, fenceGate, button, pressurePlate, door, trapdoor);
     }
 
-    public record WoodSet(String namespace, String name, @Nullable ItemConvertible after, @Nullable ItemConvertible logAfter, @Nullable Block log, @Nullable Block strippedLog, @Nullable Block wood, @Nullable Block strippedWood, Block planks, Block stairs, Block slab, Block fence, Block fenceGate, Block button, Block pressurePlate, Block door, Block trapdoor) {
+    public record WoodSet(String namespace, String name, WoodType woodType, @Nullable ItemConvertible after, @Nullable ItemConvertible logAfter, @Nullable Block log, @Nullable Block strippedLog, @Nullable Block wood, @Nullable Block strippedWood, Block planks, Block stairs, Block slab, Block fence, Block fenceGate, Block button, Block pressurePlate, Block door, Block trapdoor) {
         public WoodSet register() {
             if (after != null) {
                 if (log != null)
