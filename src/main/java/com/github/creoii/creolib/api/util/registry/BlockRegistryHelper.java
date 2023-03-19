@@ -1,11 +1,12 @@
 package com.github.creoii.creolib.api.util.registry;
 
 import com.github.creoii.creolib.api.util.registry.content.TillingSettings;
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.registry.*;
 import net.fabricmc.fabric.mixin.object.builder.AbstractBlockAccessor;
 import net.minecraft.block.Block;
+import net.minecraft.data.family.BlockFamily;
 import net.minecraft.item.BlockItem;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.registry.Registries;
@@ -66,7 +67,19 @@ public final class BlockRegistryHelper {
      * @param group itemgroup to insert into
      */
     public static void registerBlock(Identifier id, Block block, @Nullable ItemConvertible after, ItemGroup group) {
-        registerBlock(id, block, new ItemRegistryHelper.ItemGroupSettings(group, after));
+        registerBlock(id, block, new CItemSettings(), new ItemRegistryHelper.ItemGroupSettings(group, after));
+    }
+
+    /**
+     * Registers a block into a single {@link ItemGroup} after an item
+     * @param id identifier of the block
+     * @param block block to be registered
+     * @param itemSettings item settings for the block item
+     * @param after item in the itemgroup to insert after
+     * @param group itemgroup to insert into
+     */
+    public static void registerBlock(Identifier id, Block block, Item.Settings itemSettings, @Nullable ItemConvertible after, ItemGroup group) {
+        registerBlock(id, block, itemSettings, new ItemRegistryHelper.ItemGroupSettings(group, after));
     }
 
     /**
@@ -76,9 +89,20 @@ public final class BlockRegistryHelper {
      * @param groups list of itemgroups to insert into
      */
     public static void registerBlock(Identifier id, Block block, @Nullable ItemRegistryHelper.ItemGroupSettings... groups) {
+        registerBlock(id, block, new CItemSettings(), groups);
+    }
+
+    /**
+     * Registers a block into multiple {@link ItemGroup}s
+     * @param id identifier of the block
+     * @param block block to be registered
+     * @param itemSettings item settings for the block item
+     * @param groups list of itemgroups to insert into
+     */
+    public static void registerBlock(Identifier id, Block block, Item.Settings itemSettings, @Nullable ItemRegistryHelper.ItemGroupSettings... groups) {
         registerBlock(id, block);
         if (groups != null) {
-            ItemRegistryHelper.registerItem(id, new BlockItem(block, new FabricItemSettings()), groups);
+            ItemRegistryHelper.registerItem(id, new BlockItem(block, itemSettings), groups);
         }
     }
 

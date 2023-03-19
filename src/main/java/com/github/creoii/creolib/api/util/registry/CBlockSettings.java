@@ -9,7 +9,14 @@ import net.fabricmc.fabric.api.registry.LandPathNodeTypesRegistry;
 import net.fabricmc.fabric.mixin.content.registry.AxeItemAccessor;
 import net.fabricmc.fabric.mixin.content.registry.ShovelItemAccessor;
 import net.minecraft.block.*;
+import net.minecraft.entity.EntityType;
 import net.minecraft.item.HoneycombItem;
+import net.minecraft.resource.featuretoggle.FeatureFlag;
+import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.util.DyeColor;
+import net.minecraft.util.Identifier;
+
+import java.util.function.ToIntFunction;
 
 public class CBlockSettings extends FabricBlockSettings {
     private FireSettings fireSettings;
@@ -57,6 +64,50 @@ public class CBlockSettings extends FabricBlockSettings {
         return settings;
     }
 
+    public static CBlockSettings of(Material material) {
+        return of(material, material.getColor());
+    }
+
+    public static CBlockSettings of(Material material, MapColor color) {
+        return new CBlockSettings(material, color);
+    }
+
+    public static CBlockSettings of(Material material, DyeColor color) {
+        return new CBlockSettings(material, color.getMapColor());
+    }
+
+    public FireSettings getFireSettings() {
+        return fireSettings;
+    }
+
+    public DripSettings getDripSettings() {
+        return dripSettings;
+    }
+
+    public TillingSettings getTillingSettings() {
+        return tillingSettings;
+    }
+
+    public Block getStrippedBlock() {
+        return strippedBlock;
+    }
+
+    public BlockState getFlattenedState() {
+        return flattenedState;
+    }
+
+    public LandPathNodeTypesRegistry.PathNodeTypeProvider getPathNodeProvider() {
+        return pathNodeProvider;
+    }
+
+    public Block getWaxed() {
+        return waxed;
+    }
+
+    public Block getOxidized() {
+        return oxidized;
+    }
+
     public CBlockSettings fireSettings(FireSettings fireSettings) {
         this.fireSettings = fireSettings;
         return this;
@@ -102,36 +153,183 @@ public class CBlockSettings extends FabricBlockSettings {
         return this;
     }
 
-    public FireSettings getFireSettings() {
-        return fireSettings;
+    @Override
+    public CBlockSettings noCollision() {
+        super.noCollision();
+        return this;
     }
 
-    public DripSettings getDripSettings() {
-        return dripSettings;
+    @Override
+    public CBlockSettings nonOpaque() {
+        super.nonOpaque();
+        return this;
     }
 
-    public TillingSettings getTillingSettings() {
-        return tillingSettings;
+    @Override
+    public CBlockSettings slipperiness(float value) {
+        super.slipperiness(value);
+        return this;
     }
 
-    public Block getStrippedBlock() {
-        return strippedBlock;
+    @Override
+    public CBlockSettings velocityMultiplier(float velocityMultiplier) {
+        super.velocityMultiplier(velocityMultiplier);
+        return this;
     }
 
-    public BlockState getFlattenedState() {
-        return flattenedState;
+    @Override
+    public CBlockSettings jumpVelocityMultiplier(float jumpVelocityMultiplier) {
+        super.jumpVelocityMultiplier(jumpVelocityMultiplier);
+        return this;
     }
 
-    public LandPathNodeTypesRegistry.PathNodeTypeProvider getPathNodeProvider() {
-        return pathNodeProvider;
+    @Override
+    public CBlockSettings sounds(BlockSoundGroup group) {
+        super.sounds(group);
+        return this;
     }
 
-    public Block getWaxed() {
-        return waxed;
+    @Override
+    public CBlockSettings luminance(ToIntFunction<BlockState> luminanceFunction) {
+        super.luminance(luminanceFunction);
+        return this;
     }
 
-    public Block getOxidized() {
-        return oxidized;
+    @Override
+    public CBlockSettings strength(float hardness, float resistance) {
+        super.strength(hardness, resistance);
+        return this;
     }
 
+    @Override
+    public CBlockSettings breakInstantly() {
+        super.breakInstantly();
+        return this;
+    }
+
+    public CBlockSettings strength(float strength) {
+        super.strength(strength);
+        return this;
+    }
+
+    @Override
+    public CBlockSettings ticksRandomly() {
+        super.ticksRandomly();
+        return this;
+    }
+
+    @Override
+    public CBlockSettings dynamicBounds() {
+        super.dynamicBounds();
+        return this;
+    }
+
+    @Override
+    public CBlockSettings dropsNothing() {
+        super.dropsNothing();
+        return this;
+    }
+
+    @Override
+    public CBlockSettings dropsLike(Block block) {
+        super.dropsLike(block);
+        return this;
+    }
+
+    @Override
+    public CBlockSettings air() {
+        super.air();
+        return this;
+    }
+
+    @Override
+    public CBlockSettings allowsSpawning(AbstractBlock.TypedContextPredicate<EntityType<?>> predicate) {
+        super.allowsSpawning(predicate);
+        return this;
+    }
+
+    @Override
+    public CBlockSettings solidBlock(AbstractBlock.ContextPredicate predicate) {
+        super.solidBlock(predicate);
+        return this;
+    }
+
+    @Override
+    public CBlockSettings suffocates(AbstractBlock.ContextPredicate predicate) {
+        super.suffocates(predicate);
+        return this;
+    }
+
+    @Override
+    public CBlockSettings blockVision(AbstractBlock.ContextPredicate predicate) {
+        super.blockVision(predicate);
+        return this;
+    }
+
+    @Override
+    public CBlockSettings postProcess(AbstractBlock.ContextPredicate predicate) {
+        super.postProcess(predicate);
+        return this;
+    }
+
+    @Override
+    public CBlockSettings emissiveLighting(AbstractBlock.ContextPredicate predicate) {
+        super.emissiveLighting(predicate);
+        return this;
+    }
+
+    /**
+     * Make the block require tool to drop and slows down mining speed if the incorrect tool is used.
+     */
+    @Override
+    public CBlockSettings requiresTool() {
+        super.requiresTool();
+        return this;
+    }
+
+    @Override
+    public CBlockSettings mapColor(MapColor color) {
+        super.mapColor(color);
+        return this;
+    }
+
+    @Override
+    public CBlockSettings hardness(float hardness) {
+        super.hardness(hardness);
+        return this;
+    }
+
+    @Override
+    public CBlockSettings resistance(float resistance) {
+        super.resistance(resistance);
+        return this;
+    }
+
+    @Override
+    public CBlockSettings offset(AbstractBlock.OffsetType offsetType) {
+        super.offset(offsetType);
+        return this;
+    }
+
+    @Override
+    public CBlockSettings noBlockBreakParticles() {
+        super.noBlockBreakParticles();
+        return this;
+    }
+
+    @Override
+    public CBlockSettings requires(FeatureFlag... features) {
+        super.requires(features);
+        return this;
+    }
+
+    public CBlockSettings luminance(int luminance) {
+        super.luminance(luminance);
+        return this;
+    }
+
+    public CBlockSettings drops(Identifier dropTableId) {
+        super.drops(dropTableId);
+        return this;
+    }
 }
