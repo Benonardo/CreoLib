@@ -11,6 +11,6 @@ repositories {
 }
 
 dependencies {
-    modImplementation "maven.modrinth:creo-lib:VERSION"
+    modImplementation "maven.modrinth:creo-lib:<version>"
 }
 ```
