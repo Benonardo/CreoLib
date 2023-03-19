@@ -1,9 +1,9 @@
 package com.github.creoii.creolib.api.util;
 
 import com.github.creoii.creolib.api.util.registry.CBlockSettings;
-import com.github.creoii.creolib.api.util.registry.DripSettings;
-import com.github.creoii.creolib.api.util.registry.FireSettings;
-import com.github.creoii.creolib.api.util.registry.TillingSettings;
+import com.github.creoii.creolib.api.util.registry.content.DripSettings;
+import com.github.creoii.creolib.api.util.registry.content.FireSettings;
+import com.github.creoii.creolib.api.util.registry.content.TillingSettings;
 import com.github.creoii.creolib.mixin.block.BlockSettingsAccessor;
 import net.fabricmc.fabric.api.registry.LandPathNodeTypesRegistry;
 import net.minecraft.block.AbstractBlock;

@@ -6,10 +6,7 @@ import net.minecraft.util.Identifier;
 public final class DebugUtil {
     public static <T> void printRegistryValues(Registry<T> registry) {
         registry.forEach(obj -> {
-            Identifier id = registry.getId(obj);
-            if (id != null) {
-                System.out.println(id);
-            }
+            System.out.println(registry.getId(obj));
         });
     }
 }

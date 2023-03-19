@@ -3,6 +3,7 @@ package com.github.creoii.creolib.api.world.placement;
 import com.github.creoii.creolib.api.registry.StructurePlacementTypeRegistry;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.util.math.random.Random;
@@ -33,7 +34,7 @@ public class DistanceFromZeroStructurePlacement extends StructurePlacement {
     @Override
     protected boolean isStartChunk(StructurePlacementCalculator calculator, int chunkX, int chunkZ) {
         if (RANDOM.nextFloat() > chance) return false;
-        return new Vec3d(chunkX, 0d, chunkZ).squaredDistanceTo(Vec3d.ZERO) >= minSquaredDistance;
+        return new ChunkPos(chunkX, chunkZ).getStartPos().getSquaredDistance(Vec3d.ZERO) >= minSquaredDistance;
     }
 
     @Override

@@ -1,5 +1,8 @@
 package com.github.creoii.creolib.api.util.registry;
 
+import com.github.creoii.creolib.api.util.registry.content.DripSettings;
+import com.github.creoii.creolib.api.util.registry.content.FireSettings;
+import com.github.creoii.creolib.api.util.registry.content.TillingSettings;
 import com.github.creoii.creolib.core.duck.AbstractBlockDuck;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.LandPathNodeTypesRegistry;

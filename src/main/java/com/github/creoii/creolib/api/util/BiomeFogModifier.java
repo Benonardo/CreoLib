@@ -16,8 +16,8 @@ import java.util.function.Function;
 /**
  * Used to give a biome custom fog densities
  *
- * @param fogStart Distance from the camera where the fog starts
- * @param fogEnd Distance from the camera where the fog is completely dense
+ * @param fogStart distance from the camera where the fog starts
+ * @param fogEnd distance from the camera where the fog is completely dense
  */
 @Environment(EnvType.CLIENT)
 public record BiomeFogModifier(Function<FogFunction, Float> fogStart, Function<FogFunction, Float> fogEnd, FogShape fogShape) {

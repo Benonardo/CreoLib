@@ -2,7 +2,7 @@ package com.github.creoii.creolib.mixin.block;
 
 import com.github.creoii.creolib.api.tag.CBlockTags;
 import com.github.creoii.creolib.api.util.registry.CBlockSettings;
-import com.github.creoii.creolib.api.util.registry.DripSettings;
+import com.github.creoii.creolib.api.util.registry.content.DripSettings;
 import net.fabricmc.fabric.mixin.object.builder.AbstractBlockAccessor;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
