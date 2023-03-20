@@ -1,8 +1,10 @@
 package com.github.creoii.creolib.api.util.registry;
 
 import net.minecraft.block.*;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemGroups;
+import net.minecraft.item.SignItem;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
@@ -48,10 +50,11 @@ public final class RegistrySets {
         Block trapdoor = new TrapdoorBlock(CBlockSettings.copy(planks).strength(3f).nonOpaque().allowsSpawning((state, world, pos, type) -> false), blockSetType);
         Block sign = new SignBlock(CBlockSettings.copy(Blocks.OAK_SIGN), woodType);
         Block wallSign = new WallSignBlock(CBlockSettings.copy(Blocks.OAK_WALL_SIGN).mapColor(woodColor).dropsLike(sign), woodType);
-        return new WoodSet(namespace, name, woodType, after, logAfter, signAfter, log, strippedLog, wood, strippedWood, planks, stairs, slab, fence, fenceGate, button, pressurePlate, door, trapdoor, sign, wallSign);
+        Item signItem = new SignItem(new CItemSettings().maxCount(16), sign, wallSign);
+        return new WoodSet(namespace, name, woodType, after, logAfter, signAfter, log, strippedLog, wood, strippedWood, planks, stairs, slab, fence, fenceGate, button, pressurePlate, door, trapdoor, sign, wallSign, signItem);
     }
 
-    public record WoodSet(String namespace, String name, WoodType woodType, @Nullable ItemConvertible after, @Nullable ItemConvertible logAfter, @Nullable ItemConvertible signAfter, @Nullable Block log, @Nullable Block strippedLog, @Nullable Block wood, @Nullable Block strippedWood, Block planks, Block stairs, Block slab, Block fence, Block fenceGate, Block button, Block pressurePlate, Block door, Block trapdoor, Block sign, Block wallSign) {
+    public record WoodSet(String namespace, String name, WoodType woodType, @Nullable ItemConvertible after, @Nullable ItemConvertible logAfter, @Nullable ItemConvertible signAfter, @Nullable Block log, @Nullable Block strippedLog, @Nullable Block wood, @Nullable Block strippedWood, Block planks, Block stairs, Block slab, Block fence, Block fenceGate, Block button, Block pressurePlate, Block door, Block trapdoor, Block sign, Block wallSign, Item signItem) {
         public WoodSet register() {
             if (after != null) {
                 if (log != null)
@@ -99,8 +102,9 @@ public final class RegistrySets {
                 BlockRegistryHelper.registerBlock(new Identifier(namespace, name + "_pressure_plate"), pressurePlate, ItemGroups.BUILDING_BLOCKS);
                 BlockRegistryHelper.registerBlock(new Identifier(namespace, name + "_button"), button, ItemGroups.BUILDING_BLOCKS);
             }
-            BlockRegistryHelper.registerBlock(new Identifier(namespace, name + "_sign"), sign, new CItemSettings().maxCount(16), signAfter, ItemGroups.FUNCTIONAL);
-            BlockRegistryHelper.registerBlock(new Identifier(namespace, name + "_wall_sign"), wallSign, new CItemSettings().maxCount(16), signAfter, ItemGroups.FUNCTIONAL);
+            BlockRegistryHelper.registerBlock(new Identifier(namespace, name + "_sign"), sign);
+            BlockRegistryHelper.registerBlock(new Identifier(namespace, name + "_wall_sign"), wallSign);
+            ItemRegistryHelper.registerItem(new Identifier(namespace, name + "_sign"), signItem, signAfter, ItemGroups.FUNCTIONAL);
             return this;
         }
     }
