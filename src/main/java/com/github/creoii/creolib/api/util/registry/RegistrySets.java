@@ -99,8 +99,8 @@ public final class RegistrySets {
                 BlockRegistryHelper.registerBlock(new Identifier(namespace, name + "_pressure_plate"), pressurePlate, ItemGroups.BUILDING_BLOCKS);
                 BlockRegistryHelper.registerBlock(new Identifier(namespace, name + "_button"), button, ItemGroups.BUILDING_BLOCKS);
             }
-            BlockRegistryHelper.registerBlock(new Identifier(namespace, name + "_sign"), sign, signAfter, ItemGroups.FUNCTIONAL);
-            BlockRegistryHelper.registerBlock(new Identifier(namespace, name + "_wall_sign"), wallSign, signAfter, ItemGroups.FUNCTIONAL);
+            BlockRegistryHelper.registerBlock(new Identifier(namespace, name + "_sign"), sign, new CItemSettings().maxCount(16), signAfter, ItemGroups.FUNCTIONAL);
+            BlockRegistryHelper.registerBlock(new Identifier(namespace, name + "_wall_sign"), wallSign, new CItemSettings().maxCount(16), signAfter, ItemGroups.FUNCTIONAL);
             return this;
         }
     }
