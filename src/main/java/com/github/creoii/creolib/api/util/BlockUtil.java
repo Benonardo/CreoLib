@@ -4,8 +4,8 @@ import com.github.creoii.creolib.api.util.registry.CBlockSettings;
 import com.github.creoii.creolib.api.util.registry.content.DripSettings;
 import com.github.creoii.creolib.api.util.registry.content.FireSettings;
 import com.github.creoii.creolib.api.util.registry.content.TillingSettings;
-import com.github.creoii.creolib.mixin.block.BlockSettingsAccessor;
 import net.fabricmc.fabric.api.registry.LandPathNodeTypesRegistry;
+import net.fabricmc.fabric.mixin.object.builder.AbstractBlockSettingsAccessor;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -34,28 +34,28 @@ public final class BlockUtil {
      * Sets the hardness of the {@param block}
      */
     public static void setHardness(Block block, float hardness) {
-        BLOCK_SETTINGS_REPLACED.replace(block, (CBlockSettings) getOrCreateSettings(block).hardness(hardness));
+        BLOCK_SETTINGS_REPLACED.replace(block, getOrCreateSettings(block).hardness(hardness));
     }
 
     /**
      * Makes the {@param block} break instantly when mined
      */
     public static void setBreakInstantly(Block block) {
-        BLOCK_SETTINGS_REPLACED.replace(block, (CBlockSettings) getOrCreateSettings(block).hardness(0f).resistance(0f));
+        BLOCK_SETTINGS_REPLACED.replace(block, getOrCreateSettings(block).hardness(0f).resistance(0f));
     }
 
     /**
      * Returns the hardness of the {@param block}
      */
     public static float getHardness(Block block) {
-        return ((BlockSettingsAccessor) getOrCreateSettings(block)).getHardness();
+        return ((AbstractBlockSettingsAccessor) getOrCreateSettings(block)).getHardness();
     }
 
     /**
      * Returns whether the {@param block} breaks instantly when mined
      */
     public static boolean breaksInstantly(Block block) {
-        BlockSettingsAccessor settings = ((BlockSettingsAccessor) getOrCreateSettings(block));
+        AbstractBlockSettingsAccessor settings = ((AbstractBlockSettingsAccessor) getOrCreateSettings(block));
         return settings.getHardness() == 0f && settings.getResistance() == 0f;
     }
 
@@ -63,91 +63,91 @@ public final class BlockUtil {
      * Sets the resistance of the {@param block}
      */
     public static void setResistance(Block block, float resistance) {
-        BLOCK_SETTINGS_REPLACED.replace(block, (CBlockSettings) getOrCreateSettings(block).resistance(resistance));
+        BLOCK_SETTINGS_REPLACED.replace(block, getOrCreateSettings(block).resistance(resistance));
     }
 
     /**
      * Returns the resistance of the {@param block}
      */
     public static float getResistance(Block block) {
-        return ((BlockSettingsAccessor) getOrCreateSettings(block)).getResistance();
+        return ((AbstractBlockSettingsAccessor) getOrCreateSettings(block)).getResistance();
     }
 
     /**
      * Sets the hardness and resistance of the {@param block}
      */
     public static void setStrength(Block block, float hardness, float resistance) {
-        BLOCK_SETTINGS_REPLACED.replace(block, (CBlockSettings) getOrCreateSettings(block).hardness(hardness).resistance(resistance));
+        BLOCK_SETTINGS_REPLACED.replace(block, getOrCreateSettings(block).hardness(hardness).resistance(resistance));
     }
 
     /**
      * Sets the slipperiness of the {@param block}
      */
     public static void setSlipperiness(Block block, float slipperiness) {
-        BLOCK_SETTINGS_REPLACED.replace(block, (CBlockSettings) getOrCreateSettings(block).slipperiness(slipperiness));
+        BLOCK_SETTINGS_REPLACED.replace(block, getOrCreateSettings(block).slipperiness(slipperiness));
     }
 
     /**
      * Returns the slipperiness of the {@param block}
      */
     public static float getSlipperiness(Block block) {
-        return ((BlockSettingsAccessor) getOrCreateSettings(block)).getSlipperiness();
+        return ((AbstractBlockSettingsAccessor) getOrCreateSettings(block)).getSlipperiness();
     }
 
     /**
      * Sets the velocity multiplier of the {@param block}
      */
     public static void setVelocityMultiplier(Block block, float multiplier) {
-        BLOCK_SETTINGS_REPLACED.replace(block, (CBlockSettings) getOrCreateSettings(block).velocityMultiplier(multiplier));
+        BLOCK_SETTINGS_REPLACED.replace(block, getOrCreateSettings(block).velocityMultiplier(multiplier));
     }
 
     /**
      * Returns the velocity multiplier of the {@param block}
      */
     public static float getVelocityMultiplier(Block block) {
-        return ((BlockSettingsAccessor) getOrCreateSettings(block)).getVelocityMultiplier();
+        return ((AbstractBlockSettingsAccessor) getOrCreateSettings(block)).getVelocityMultiplier();
     }
 
     /**
      * Sets the jump velocity multiplier of the {@param block}
      */
     public static void setJumpVelocityMultiplier(Block block, float multiplier) {
-        BLOCK_SETTINGS_REPLACED.replace(block, (CBlockSettings) getOrCreateSettings(block).jumpVelocityMultiplier(multiplier));
+        BLOCK_SETTINGS_REPLACED.replace(block, getOrCreateSettings(block).jumpVelocityMultiplier(multiplier));
     }
 
     /**
      * Returns the jump velocity multiplier of the {@param block}
      */
     public static float getJumpVelocityMultiplier(Block block) {
-        return ((BlockSettingsAccessor) getOrCreateSettings(block)).getJumpVelocityMultiplier();
+        return ((AbstractBlockSettingsAccessor) getOrCreateSettings(block)).getJumpVelocityMultiplier();
     }
 
     /**
      * Sets the sound group of the {@param block}
      */
     public static void setSoundGroup(Block block, BlockSoundGroup soundGroup) {
-        BLOCK_SETTINGS_REPLACED.replace(block, (CBlockSettings) getOrCreateSettings(block).sounds(soundGroup));
+        BLOCK_SETTINGS_REPLACED.replace(block, getOrCreateSettings(block).sounds(soundGroup));
     }
 
     /**
      * Returns the sound group of the {@param block}
      */
     public static BlockSoundGroup getSoundGroup(Block block) {
-        return ((BlockSettingsAccessor) getOrCreateSettings(block)).getSoundGroup();
+        return ((AbstractBlockSettingsAccessor) getOrCreateSettings(block)).getSoundGroup();
     }
 
     /**
      * Sets the luminance of the {@param block}
      */
     public static void setLuminance(Block block, int luminance) {
-        BLOCK_SETTINGS_REPLACED.replace(block, (CBlockSettings) getOrCreateSettings(block).luminance(luminance));
+        BLOCK_SETTINGS_REPLACED.replace(block, getOrCreateSettings(block).luminance(luminance));
     }
 
     /**
      * Returns the luminance of the {@param block}
      */
     public static int getLuminance(BlockState state) {
-        return ((BlockSettingsAccessor) getOrCreateSettings(state.getBlock())).getLuminance().applyAsInt(state);
+        return ((AbstractBlockSettingsAccessor) getOrCreateSettings(state.getBlock())).getLuminance().applyAsInt(state);
     }
 
     /**
@@ -161,49 +161,49 @@ public final class BlockUtil {
      * Sets the map color of the {@param block}
      */
     public static void setMapColor(Block block, MapColor color) {
-        BLOCK_SETTINGS_REPLACED.replace(block, (CBlockSettings) getOrCreateSettings(block).mapColor(color));
+        BLOCK_SETTINGS_REPLACED.replace(block, getOrCreateSettings(block).mapColor(color));
     }
 
     /**
      * Returns the map color of the {@param block}
      */
     public static MapColor getMapColor(Block block) {
-        return ((BlockSettingsAccessor) getOrCreateSettings(block)).getMaterial().getColor();
+        return ((AbstractBlockSettingsAccessor) getOrCreateSettings(block)).getMaterial().getColor();
     }
 
     /**
      * Sets the offset type of the {@param block}
      */
     public static void setOffsetType(Block block, AbstractBlock.OffsetType offsetType) {
-        BLOCK_SETTINGS_REPLACED.replace(block, (CBlockSettings) getOrCreateSettings(block).offset(offsetType));
+        BLOCK_SETTINGS_REPLACED.replace(block, getOrCreateSettings(block).offset(offsetType));
     }
 
     /**
      * Makes the {@param block} non-collidable
      */
     public static void setNoCollision(Block block) {
-        BLOCK_SETTINGS_REPLACED.replace(block, (CBlockSettings) getOrCreateSettings(block).noCollision());
+        BLOCK_SETTINGS_REPLACED.replace(block, getOrCreateSettings(block).noCollision());
     }
 
     /**
      * Returns whether the {@param block} is collidable
      */
     public static boolean isCollidable(Block block) {
-        return ((BlockSettingsAccessor) getOrCreateSettings(block)).isCollidable();
+        return ((AbstractBlockSettingsAccessor) getOrCreateSettings(block)).getCollidable();
     }
 
     /**
      * Makes the {@param block} require a tool to drop when it is mined
      */
     public static void setToolRequired(Block block) {
-        BLOCK_SETTINGS_REPLACED.replace(block, (CBlockSettings) getOrCreateSettings(block).requiresTool());
+        BLOCK_SETTINGS_REPLACED.replace(block, getOrCreateSettings(block).requiresTool());
     }
 
     /**
      * Returns whether a tool is required for the {@param block} to drop when mined
      */
     public static boolean isToolRequired(Block block) {
-        return ((BlockSettingsAccessor) getOrCreateSettings(block)).isToolRequired();
+        return ((AbstractBlockSettingsAccessor) getOrCreateSettings(block)).isToolRequired();
     }
 
     /**
@@ -217,14 +217,14 @@ public final class BlockUtil {
      * Makes the {@param block} emissive based on its blockstate
      */
     public static void setEmissive(Block block, AbstractBlock.ContextPredicate emissive) {
-        BLOCK_SETTINGS_REPLACED.replace(block, (CBlockSettings) getOrCreateSettings(block).emissiveLighting(emissive));
+        BLOCK_SETTINGS_REPLACED.replace(block, getOrCreateSettings(block).emissiveLighting(emissive));
     }
 
     /**
      * Returns whether the {@param block} is emissive
      */
     public static boolean isEmissive(BlockState state, BlockView world, BlockPos pos) {
-        return ((BlockSettingsAccessor) getOrCreateSettings(state.getBlock())).hasEmissiveLighting().test(state, world, pos);
+        return ((AbstractBlockSettingsAccessor) getOrCreateSettings(state.getBlock())).getEmissiveLightingPredicate().test(state, world, pos);
     }
 
     /**
@@ -238,14 +238,14 @@ public final class BlockUtil {
      * Makes the {@param block} have post-processing based on its blockstate
      */
     public static void setPostProcessing(Block block, AbstractBlock.ContextPredicate postProcessing) {
-        BLOCK_SETTINGS_REPLACED.replace(block, (CBlockSettings) getOrCreateSettings(block).postProcess(postProcessing));
+        BLOCK_SETTINGS_REPLACED.replace(block, getOrCreateSettings(block).postProcess(postProcessing));
     }
 
     /**
      * Returns whether the {@param block} has post-processing
      */
     public static boolean hasPostProcessing(BlockState state, BlockView world, BlockPos pos) {
-        return ((BlockSettingsAccessor) getOrCreateSettings(state.getBlock())).hasPostProcessing().test(state, world, pos);
+        return ((AbstractBlockSettingsAccessor) getOrCreateSettings(state.getBlock())).getPostProcessPredicate().test(state, world, pos);
     }
 
     /**
@@ -259,14 +259,14 @@ public final class BlockUtil {
      * Makes the {@param block} suffocate entities inside of it based on its blockstate
      */
     public static void setSuffocates(Block block, AbstractBlock.ContextPredicate suffocates) {
-        BLOCK_SETTINGS_REPLACED.replace(block, (CBlockSettings) getOrCreateSettings(block).suffocates(suffocates));
+        BLOCK_SETTINGS_REPLACED.replace(block, getOrCreateSettings(block).suffocates(suffocates));
     }
 
     /**
      * Returns whether the {@param block} suffocates entities when inside it
      */
     public static boolean doesSuffocate(BlockState state, BlockView world, BlockPos pos) {
-        return ((BlockSettingsAccessor) getOrCreateSettings(state.getBlock())).suffocates().test(state, world, pos);
+        return ((AbstractBlockSettingsAccessor) getOrCreateSettings(state.getBlock())).getSuffocationPredicate().test(state, world, pos);
     }
 
     /**
@@ -280,14 +280,14 @@ public final class BlockUtil {
      * Makes the {@param block} allow mob spawning on top based on its blockstate
      */
     public static void setAllowsSpawning(Block block, AbstractBlock.TypedContextPredicate<EntityType<?>> allows) {
-        BLOCK_SETTINGS_REPLACED.replace(block, (CBlockSettings) getOrCreateSettings(block).allowsSpawning(allows));
+        BLOCK_SETTINGS_REPLACED.replace(block, getOrCreateSettings(block).allowsSpawning(allows));
     }
 
     /**
      * Returns whether the {@param block} allows mobs to spawn on top of it
      */
     public static boolean allowsSpawning(BlockState state, BlockView world, BlockPos pos, EntityType<?> entityType) {
-        return ((BlockSettingsAccessor) getOrCreateSettings(state.getBlock())).allowsSpawning().test(state, world, pos, entityType);
+        return ((AbstractBlockSettingsAccessor) getOrCreateSettings(state.getBlock())).getAllowsSpawningPredicate().test(state, world, pos, entityType);
     }
 
     /**

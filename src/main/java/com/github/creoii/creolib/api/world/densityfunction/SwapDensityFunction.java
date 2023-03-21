@@ -10,7 +10,7 @@ public record SwapDensityFunction(DensityFunction input, SwapType swapType) impl
     public static final Codec<SwapDensityFunction> CODEC = RecordCodecBuilder.create(instance -> {
         return instance.group(
                 DensityFunction.CODEC.fieldOf("input").forGetter(SwapDensityFunction::input),
-                SwapType.CODEC.fieldOf("swap_type").forGetter(SwapDensityFunction::swapType)
+                SwapType.CODEC.fieldOf("swap").forGetter(SwapDensityFunction::swapType)
         ).apply(instance, SwapDensityFunction::new);
     });
     public static final CodecHolder<SwapDensityFunction> CODEC_HOLDER = CodecHolder.of(CODEC);
@@ -31,7 +31,7 @@ public record SwapDensityFunction(DensityFunction input, SwapType swapType) impl
                 y = pos.blockY();
                 z = pos.blockX();
             }
-            case Z_AND_Y -> {
+            case Y_AND_Z -> {
                 x = pos.blockX();
                 y = pos.blockZ();
                 z = pos.blockY();
@@ -68,7 +68,7 @@ public record SwapDensityFunction(DensityFunction input, SwapType swapType) impl
     public enum SwapType implements StringIdentifiable {
         X_AND_Y("x_and_y"),
         X_AND_Z("x_and_z"),
-        Z_AND_Y("z_and_y");
+        Y_AND_Z("y_and_z");
 
         public static final Codec<SwapType> CODEC = StringIdentifiable.createCodec(SwapType::values);
         private final String name;

@@ -16,6 +16,7 @@ public final class CreoLib implements ModInitializer {
         StructurePlacementTypeRegistry.register();
         MaterialConditionRegistry.register();
         DensityFunctionTypeRegistry.register();
+        ProvidersRegistry.register();
         CBiomeTags.loadVanillaFeatureTags();
     }
 }
