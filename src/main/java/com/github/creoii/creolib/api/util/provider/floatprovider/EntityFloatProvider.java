@@ -33,6 +33,7 @@ public class EntityFloatProvider extends FloatProvider {
         if (entity instanceof PlayerEntity player) {
             return switch (key) {
                 case "stride_distance" -> player.strideDistance;
+                default -> 1f;
             };
         }
         if (entity instanceof LivingEntity living) {
@@ -51,6 +52,7 @@ public class EntityFloatProvider extends FloatProvider {
                 case "sound_pitch" -> living.getSoundPitch();
                 case "max_health" -> living.getMaxHealth();
                 case "movement_speed" -> living.getMovementSpeed();
+                default -> 1f;
             };
         }
         return switch (key) {
@@ -75,6 +77,7 @@ public class EntityFloatProvider extends FloatProvider {
             case "z" -> (float) entity.getZ();
             case "random_body_y" -> (float) entity.getRandomBodyY();
             case "swim_height" -> (float) entity.getSwimHeight();
+            default -> 1f;
         };
     }
 

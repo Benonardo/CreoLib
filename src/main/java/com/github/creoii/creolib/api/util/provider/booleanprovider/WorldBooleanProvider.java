@@ -36,6 +36,7 @@ public class WorldBooleanProvider extends BooleanProvider {
             case "is_night" -> world.isNight();
             case "is_raining" -> world.isRaining();
             case "is_thundering" -> world.isThundering();
+            default -> true;
         };
     }
 

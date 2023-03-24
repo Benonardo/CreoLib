@@ -1,5 +1,6 @@
 package com.github.creoii.creolib.api.util.provider.booleanprovider;
 
+import com.github.creoii.creolib.api.registry.ProvidersRegistry;
 import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -33,7 +34,7 @@ public class ConstantBooleanProvider extends BooleanProvider {
 
     @Override
     public BooleanProviderType<?> getType() {
-        return BooleanProviderType.CONSTANT;
+        return ProvidersRegistry.CONSTANT_BOOLEAN;
     }
 
     public String toString() {

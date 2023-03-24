@@ -25,8 +25,8 @@ public record BiomeFogModifier(Function<FogFunction, Float> fogStart, Function<F
 
     public record FogFunction(Camera camera, ClientWorld world, Entity focusedEntity, float viewDistance, float tickDelta) { }
 
-    public static void register(RegistryKey<Biome> biomeKey, BiomeFogModifier modifier) {
-        BIOME_FOG_MODIFIERS.put(biomeKey, modifier);
+    public static void register(RegistryKey<Biome> predicate, BiomeFogModifier modifier) {
+        BIOME_FOG_MODIFIERS.put(predicate, modifier);
     }
 
     public static Map<RegistryKey<Biome>, BiomeFogModifier> getBiomeFogModifiers() {

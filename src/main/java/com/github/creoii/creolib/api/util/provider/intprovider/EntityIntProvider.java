@@ -35,6 +35,7 @@ public class EntityIntProvider extends IntProvider {
                 case "experience_level" -> player.experienceLevel;
                 case "next_level_experience" -> player.getNextLevelExperience();
                 case "score" -> player.getScore();
+                default -> 1;
             };
         }
         if (entity instanceof LivingEntity living) {
@@ -49,6 +50,7 @@ public class EntityIntProvider extends IntProvider {
                 case "item_use_time" -> living.getItemUseTime();
                 case "last_attacked_time" -> living.getLastAttackedTime();
                 case "last_attack_time" -> living.getLastAttackTime();
+                default -> 1;
             };
         }
         return switch (key) {
@@ -61,6 +63,7 @@ public class EntityIntProvider extends IntProvider {
             case "fire_ticks" -> entity.getFireTicks();
             case "frozen_ticks" -> entity.getFrozenTicks();
             case "safe_fall_distance" -> entity.getSafeFallDistance();
+            default -> 1;
         };
     }
 

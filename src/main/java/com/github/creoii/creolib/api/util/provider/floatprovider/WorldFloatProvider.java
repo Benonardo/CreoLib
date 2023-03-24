@@ -35,6 +35,7 @@ public class WorldFloatProvider extends FloatProvider {
             case "spawn_angle" -> world.getSpawnAngle();
             case "thunder_gradient" -> world.getThunderGradient(1f);
             case "moon_size" -> world.getMoonSize();
+            default -> 1f;
         };
     }
 

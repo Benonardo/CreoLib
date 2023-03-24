@@ -1,5 +1,6 @@
 package com.github.creoii.creolib.api.util.provider.booleanprovider;
 
+import com.github.creoii.creolib.api.registry.ProvidersRegistry;
 import com.mojang.serialization.Codec;
 import net.minecraft.util.math.random.Random;
 
@@ -20,6 +21,6 @@ public class RandomBooleanProvider extends BooleanProvider {
 
     @Override
     public BooleanProviderType<?> getType() {
-        return BooleanProviderType.RANDOM;
+        return ProvidersRegistry.RANDOM_BOOLEAN;
     }
 }

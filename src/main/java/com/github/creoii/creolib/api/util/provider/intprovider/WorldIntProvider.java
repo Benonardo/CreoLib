@@ -39,6 +39,7 @@ public class WorldIntProvider extends IntProvider {
             case "time_of_day" -> (int) world.getTimeOfDay();
             case "lunar_time" -> (int) world.getLunarTime();
             case "moon_phase" -> world.getMoonPhase();
+            default -> -1;
         };
     }
 

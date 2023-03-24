@@ -8,7 +8,6 @@
     "block.AbstractBlockStateMixin",
     "block.AbstractFireBlockMixin",
     "block.AnvilBlockMixin",
-    "block.BlockSettingsAccessor",
     "block.CactusBlockMixin",
     "block.CampfireBlockMixin",
     "block.CocoaBlockMixin",

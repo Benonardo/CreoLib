@@ -48,6 +48,7 @@ public class BlockStateFloatProvider extends FloatProvider {
             case "slipperiness" -> world != null && pos != null ? ((AbstractBlockSettingsAccessor) state.getBlock()).getSlipperiness() : -1f;
             case "jump_velocity_multiplier" -> world != null && pos != null ? ((AbstractBlockSettingsAccessor) state.getBlock()).getJumpVelocityMultiplier() : -1f;
             case "velocity_multiplier" -> world != null && pos != null ? ((AbstractBlockSettingsAccessor) state.getBlock()).getVelocityMultiplier() : -1f;
+            default -> 1f;
         };
     }
 

@@ -45,6 +45,7 @@ public class EntityBooleanProvider extends BooleanProvider {
                 case "should_cancel_interaction" -> player.shouldCancelInteraction();
                 case "should_filter_text" -> player.shouldFilterText();
                 case "should_render_name" -> player.shouldRenderName();
+                default -> true;
             };
         }
         if (entity instanceof LivingEntity living) {
@@ -69,6 +70,7 @@ public class EntityBooleanProvider extends BooleanProvider {
                 case "is_undead" -> living.isUndead();
                 case "is_using_item" -> living.isUsingItem();
                 case "is_using_riptide" -> living.isUsingRiptide();
+                default -> true;
             };
         }
         return switch (key) {
@@ -112,6 +114,7 @@ public class EntityBooleanProvider extends BooleanProvider {
             case "is_immune_to_explosion" -> entity.isImmuneToExplosion();
             case "is_invulnerable" -> entity.isInvulnerable();
             case "is_player" -> entity.isPlayer();
+            default -> true;
         };
     }
 
