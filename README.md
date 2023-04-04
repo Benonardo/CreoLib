@@ -1,6 +1,8 @@
 # CreoLib
 
-Latest version: 0.0.1-alpha.11
+Latest version: [0.0.1-alpha.12](https://modrinth.com/mod/creo-lib/version/0.0.1-alpha.12)
+
+Wiki: [here](https://github.com/jack-zisa/CreoLib/wiki)
  
 ```gradle
 repositories {
