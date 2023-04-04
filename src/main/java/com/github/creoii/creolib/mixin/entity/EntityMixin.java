@@ -1,14 +1,13 @@
 package com.github.creoii.creolib.mixin.entity;
 
+import com.github.creoii.creolib.api.entity.ScalableEntity;
 import com.github.creoii.creolib.api.tag.CBlockTags;
 import com.github.creoii.creolib.api.tag.CEntityTypeTags;
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FluidBlock;
 import net.minecraft.block.ShapeContext;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.MovementType;
+import net.minecraft.entity.*;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.damage.DamageType;
 import net.minecraft.entity.damage.DamageTypes;
@@ -16,12 +15,14 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
@@ -44,8 +45,17 @@ public abstract class EntityMixin {
     @Shadow public abstract boolean isSubmergedInWater();
     @Shadow public abstract boolean isDescending();
     @Shadow public abstract boolean isSpectator();
+    @Shadow protected abstract float getEyeHeight(EntityPose pose, EntityDimensions dimensions);
+    @Shadow public abstract EntityPose getPose();
     @Shadow protected boolean onGround;
     @Shadow public boolean noClip;
+    @Shadow private EntityDimensions dimensions;
+    @Shadow private float standingEyeHeight;
+
+    @Shadow public abstract EntityDimensions getDimensions(EntityPose pose);
+
+    @Shadow public abstract double getY();
+
     private static final ImmutableMap<RegistryKey<DamageType>, TagKey<EntityType<?>>> DAMAGE_IMMUNITIES = new ImmutableMap.Builder<RegistryKey<DamageType>, TagKey<EntityType<?>>>()
             .put(DamageTypes.GENERIC, CEntityTypeTags.GENERIC_IMMUNE)
             .put(DamageTypes.FALL, CEntityTypeTags.FALL_IMMUNE)
@@ -134,6 +144,25 @@ public abstract class EntityMixin {
     private void creo_lib_isCollidable(CallbackInfoReturnable<Boolean> cir) {
         if (getType().isIn(CEntityTypeTags.COLLIDABLE)) {
             cir.setReturnValue(true);
+        }
+    }
+
+    @Inject(method = "calculateDimensions", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/Entity;refreshPosition()V"))
+    private void creo_lib_scaleDimensions(CallbackInfo ci) {
+        if (((Entity) (Object) this) instanceof ScalableEntity scalableEntity) {
+            dimensions = dimensions.scaled(scalableEntity.getScale());
+            standingEyeHeight = getEyeHeight(getPose(), dimensions) * (getType().isIn(CEntityTypeTags.EYE_HEIGHT_SCALED_LESS) ? 1f : scalableEntity.getScale());
+        }
+    }
+
+    @Inject(method = "calculateBoundsForPose", at = @At("HEAD"), cancellable = true)
+    private void creo_lib_scaleBoundsForPose(EntityPose pos, CallbackInfoReturnable<Box> cir) {
+        if (((Entity) (Object) this) instanceof ScalableEntity scalableEntity) {
+            EntityDimensions dimensions = getDimensions(pos).scaled(scalableEntity.getScale());
+            float f = dimensions.width / 2f;
+            Vec3d vec3d = new Vec3d(this.getX() - (double)f, getY(), getZ() - (double)f);
+            Vec3d vec3d2 = new Vec3d(this.getX() + (double)f, getY() + (double)dimensions.height, getZ() + (double)f);
+            cir.setReturnValue(new Box(vec3d, vec3d2));
         }
     }
 }

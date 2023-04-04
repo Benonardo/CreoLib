@@ -1,6 +1,7 @@
 package com.github.creoii.creolib.mixin.client.render;
 
 import com.github.creoii.creolib.api.entity.GlintableEntity;
+import com.github.creoii.creolib.api.entity.ScalableEntity;
 import com.github.creoii.creolib.api.tag.CEntityTypeTags;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -33,6 +34,14 @@ public abstract class LivingEntityRendererMixin<T extends LivingEntity, M extend
     private void creo_lib_glintedEntities(T livingEntity, float f, float g, MatrixStack matrices, VertexConsumerProvider vertexConsumerProvider, int i, CallbackInfo ci) {
         if (livingEntity.getType().isIn(CEntityTypeTags.GLINTED) || livingEntity instanceof GlintableEntity glintableEntity && glintableEntity.hasGlint()) {
             model.render(matrices, vertexConsumerProvider.getBuffer(RenderLayer.getEntityGlint()), i, OverlayTexture.field_32953, .5f, .5f, .5f, 1f);
+        }
+    }
+
+    @Inject(method = "render(Lnet/minecraft/entity/LivingEntity;FFLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/util/math/MatrixStack;translate(FFF)V", ordinal = 1))
+    private void creo_lib_applyEntityScale(T livingEntity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, CallbackInfo ci) {
+        if (livingEntity instanceof ScalableEntity scalableEntity) {
+            float scale = scalableEntity.getScale();
+            matrixStack.scale(scale, scale, scale);
         }
     }
 }

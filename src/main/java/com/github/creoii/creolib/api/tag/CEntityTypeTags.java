@@ -38,6 +38,7 @@ public final class CEntityTypeTags {
     public static final TagKey<EntityType<?>> ARTHROPOD = TagKey.of(RegistryKeys.ENTITY_TYPE, new Identifier(CreoLib.COMMON, "arthropod"));
     public static final TagKey<EntityType<?>> AQUATIC = TagKey.of(RegistryKeys.ENTITY_TYPE, new Identifier(CreoLib.COMMON, "aquatic"));
     public static final TagKey<EntityType<?>> ILLAGER = TagKey.of(RegistryKeys.ENTITY_TYPE, new Identifier(CreoLib.COMMON, "illager"));
+    public static final TagKey<EntityType<?>> EYE_HEIGHT_SCALED_LESS = TagKey.of(RegistryKeys.ENTITY_TYPE, new Identifier(CreoLib.COMMON, "eye_height_scaled_less"));
 
     /**
      * TODO:
