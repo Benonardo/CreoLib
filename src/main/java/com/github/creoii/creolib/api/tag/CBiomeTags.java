@@ -16,7 +16,7 @@ public final class CBiomeTags {
     public static final Map<RegistryKey<PlacedFeature>, TagKey<Biome>> HAS_FEATURE_TAGS = Maps.newHashMap();
 
     @SuppressWarnings("unchecked")
-    private static void loadTags(Class<?> clazz) {
+    private static void loadFeatureTags(Class<?> clazz) {
         Arrays.stream(clazz.getFields()).forEach(field -> {
             if (field.getType() == RegistryKey.class) {
                 try {
@@ -30,14 +30,14 @@ public final class CBiomeTags {
     }
 
     public static void loadVanillaFeatureTags() {
-        loadTags(OceanPlacedFeatures.class);
-        loadTags(UndergroundPlacedFeatures.class);
-        loadTags(EndPlacedFeatures.class);
-        loadTags(MiscPlacedFeatures.class);
-        loadTags(NetherPlacedFeatures.class);
-        loadTags(OrePlacedFeatures.class);
-        loadTags(TreePlacedFeatures.class);
-        loadTags(VegetationPlacedFeatures.class);
-        loadTags(VillagePlacedFeatures.class);
+        loadFeatureTags(OceanPlacedFeatures.class);
+        loadFeatureTags(UndergroundPlacedFeatures.class);
+        loadFeatureTags(EndPlacedFeatures.class);
+        loadFeatureTags(MiscPlacedFeatures.class);
+        loadFeatureTags(NetherPlacedFeatures.class);
+        loadFeatureTags(OrePlacedFeatures.class);
+        loadFeatureTags(TreePlacedFeatures.class);
+        loadFeatureTags(VegetationPlacedFeatures.class);
+        loadFeatureTags(VillagePlacedFeatures.class);
     }
 }

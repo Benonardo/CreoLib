@@ -27,16 +27,19 @@ public class BlockStateFloatProvider extends FloatProvider {
         this.key = key;
     }
 
-    public void setWorld(World world) {
+    public BlockStateFloatProvider setWorld(World world) {
         this.world = world;
+        return this;
     }
 
-    public void setState(BlockState state) {
+    public BlockStateFloatProvider setState(BlockState state) {
         this.state = state;
+        return this;
     }
 
-    public void setPos(BlockPos pos) {
+    public BlockStateFloatProvider setPos(BlockPos pos) {
         this.pos = pos;
+        return this;
     }
 
     @Override

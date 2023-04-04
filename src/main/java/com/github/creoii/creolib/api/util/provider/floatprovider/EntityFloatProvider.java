@@ -24,8 +24,9 @@ public class EntityFloatProvider extends FloatProvider {
         this.key = key;
     }
 
-    public void setEntity(Entity entity) {
+    public EntityFloatProvider setEntity(Entity entity) {
         this.entity = entity;
+        return this;
     }
 
     @Override

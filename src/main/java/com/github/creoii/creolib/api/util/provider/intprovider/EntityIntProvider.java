@@ -24,8 +24,9 @@ public class EntityIntProvider extends IntProvider {
         this.key = key;
     }
 
-    public void setEntity(Entity entity) {
+    public EntityIntProvider setEntity(Entity entity) {
         this.entity = entity;
+        return this;
     }
 
     @Override

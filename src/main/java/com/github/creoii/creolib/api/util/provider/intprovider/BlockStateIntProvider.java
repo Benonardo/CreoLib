@@ -31,16 +31,19 @@ public class BlockStateIntProvider extends IntProvider {
         this.key = key;
     }
 
-    public void setWorld(World world) {
+    public BlockStateIntProvider setWorld(World world) {
         this.world = world;
+        return this;
     }
 
-    public void setState(BlockState state) {
+    public BlockStateIntProvider setState(BlockState state) {
         this.state = state;
+        return this;
     }
 
-    public void setPos(BlockPos pos) {
+    public BlockStateIntProvider setPos(BlockPos pos) {
         this.pos = pos;
+        return this;
     }
 
     @Override

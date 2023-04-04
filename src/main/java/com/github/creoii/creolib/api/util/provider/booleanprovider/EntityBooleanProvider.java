@@ -24,8 +24,9 @@ public class EntityBooleanProvider extends BooleanProvider {
         this.key = key;
     }
 
-    public void setEntity(Entity entity) {
+    public EntityBooleanProvider setEntity(Entity entity) {
         this.entity = entity;
+        return this;
     }
 
     @Override
