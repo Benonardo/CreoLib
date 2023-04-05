@@ -52,6 +52,7 @@
   ],
   "client": [
     "client.BackgroundRendererMixin",
+    "client.CameraMixin",
     "client.ClientPlayerEntityMixin",
     "client.ClientPlayerInteractionManagerMixin",
     "client.ClientWorldMixin",

@@ -23,10 +23,7 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.ModifyVariable;
-import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
@@ -64,7 +61,7 @@ public abstract class LivingEntityMixin extends Entity implements GlintableEntit
 
     @Inject(method = "createLivingAttributes", at = @At("RETURN"))
     private static void creo_lib_createNewAttributes(CallbackInfoReturnable<DefaultAttributeContainer.Builder> cir) {
-        cir.getReturnValue().add(AttributeRegistry.GENERIC_GRAVITY).add(AttributeRegistry.GENERIC_SWIM_SPEED).add(AttributeRegistry.GENERIC_ATTACK_RANGE).add(AttributeRegistry.GENERIC_SCALE, 1d);
+        cir.getReturnValue().add(AttributeRegistry.GENERIC_GRAVITY).add(AttributeRegistry.GENERIC_SWIM_SPEED, .03999999910593033d).add(AttributeRegistry.GENERIC_ATTACK_RANGE).add(AttributeRegistry.GENERIC_SCALE, 1d).add(AttributeRegistry.GENERIC_JUMP_STRENGTH, .42d);
     }
 
     @Inject(method = "knockDownwards", at = @At("HEAD"), cancellable = true)
@@ -97,7 +94,7 @@ public abstract class LivingEntityMixin extends Entity implements GlintableEntit
 
     @Inject(method = "swimUpward", at = @At("HEAD"), cancellable = true)
     private void creo_lib_applyUpwardSwimSpeed(TagKey<Fluid> fluid, CallbackInfo ci) {
-        setVelocity(getVelocity().add(0d, .03999999910593033d * getAttributeValue(AttributeRegistry.GENERIC_SWIM_SPEED), 0d));
+        setVelocity(getVelocity().add(0d, getAttributeValue(AttributeRegistry.GENERIC_SWIM_SPEED), 0d));
         ci.cancel();
     }
 
@@ -180,5 +177,15 @@ public abstract class LivingEntityMixin extends Entity implements GlintableEntit
     @Inject(method = "getDimensions", at = @At("RETURN"), cancellable = true)
     private void creo_lib_scaleDimensions(EntityPose pose, CallbackInfoReturnable<EntityDimensions> cir) {
         cir.setReturnValue(cir.getReturnValue().scaled(getTrackedScale()));
+    }
+
+    @ModifyConstant(method = "getJumpVelocity", constant = @Constant(floatValue = .42f))
+    private float creo_lib_applyJumpStrength(float constant) {
+        return (float) getAttributeValue(AttributeRegistry.GENERIC_JUMP_STRENGTH);
+    }
+
+    @Inject(method = "getStepHeight", at = @At("RETURN"), cancellable = true)
+    private void creo_lib_adjustStepHeightForScale(CallbackInfoReturnable<Float> cir) {
+        cir.setReturnValue(cir.getReturnValue() * ((float) getAttributeValue(AttributeRegistry.GENERIC_SCALE) / 2f));
     }
 }
